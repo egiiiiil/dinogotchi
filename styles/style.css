@@ -1,0 +1,40 @@
+<<<<<<< Updated upstream
+=======
+body {
+  background-size: 100%;
+}
+
+#clock {
+  height: auto;
+  width: auto;
+  color: #e9eb9e;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 50px;
+}
+
+main {
+  background-color: white;
+  border-style: solid;
+  display: inline-block;
+  width: 50vw;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  left: 5%;
+}
+
+main img {
+  width: 90%;
+  height: 80%;
+}
+/*# sourceMappingURL=style.css.map */
+>>>>>>> Stashed changes
