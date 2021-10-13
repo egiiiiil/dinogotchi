@@ -9,12 +9,15 @@ if (document.body) {
 	}
 }
 
+
+// declared outside of clock function bc we wanted to use them in another functions too 
 let time
 let mins
 let secs
 let date
 let epochCurrentTime
 
+//function displaying on the screen current time 
 let clock = () => {
 	date = new Date();
 	let hrs = date.getHours();
@@ -34,22 +37,23 @@ let clock = () => {
 	time = `${hrs}:${mins}:${secs}:${period}`;
 	document.getElementById("clock").innerText = time;
 	epochCurrentTime = date.getTime();
-	console.log(epochCurrentTime);
 	setTimeout(clock, 1000);
 
 }
 clock();
 
+//*export in case if we'll use separate files*
 // export {
 // 	time as time
 // };
+
 
 //button dissapear on click
 const startBtn = document.getElementById('btn');
 
 function btnHide() {
 	startBtn.style.display = "none";
-
+	//when clicked run these functions
 	setStartDate();
 	calculateCurrentPlayTime();
 
@@ -58,11 +62,11 @@ function btnHide() {
 startBtn.addEventListener("click", btnHide);
 
 
-
+//monster object
 const monster = {
 	startDate: '',
 	endDate: '',
-	currentTime: time,
+	currentTime: '',
 	aliveTime: '',
 	neededSleep: 8,
 	actualSleep: '',
@@ -73,27 +77,56 @@ const monster = {
 	moodHappy: true,
 }
 
+//push monster object to local storage
 localStorage.setItem("monster", JSON.stringify(monster));
 
-console.log(time);
+//function updating current time in monster object(3rd key)
+function updateCurrentTime() {
+	monster.currentTime = time;
+	//updating every second
+	setTimeout(updateCurrentTime, 1000);
+	//pushing into local storage
+	localStorage.setItem("monster", JSON.stringify(monster));
+}
+updateCurrentTime();
 
-
+//Epoch time = milliseconds that have passed since midnight on January 1st, 1970
 let epochGameStartTime
+
 //connecting start time of the game to startDate and sending it to local storage
 function setStartDate() {
 	let gameStartDate = new Date();
 	monster.startDate = gameStartDate;
 
-
+	//assigning milliseconds passed since January 1st 1970 to epochGameStartTime
 	epochGameStartTime = gameStartDate.getTime()
-
-	console.log(epochGameStartTime, "poop")
 
 	localStorage.setItem("monster", JSON.stringify(monster));
 }
 
+//this variable will be assigned to actual millisecods of play time (difference between epochCurrentTime and epochGameStartTime)
+let milliseconds
+
 function calculateCurrentPlayTime() {
-	monster.currentPlayTime = epochCurrentTime - epochGameStartTime;
-	console.log(monster.currentPlayTime, "number");
+	milliseconds = epochCurrentTime - epochGameStartTime;
+	monster.currentPlayTime = formatPlayTime(milliseconds);
 	setTimeout(calculateCurrentPlayTime, 1000);
+	localStorage.setItem("monster", JSON.stringify(monster));
 }
+
+
+
+//reformatting currentPlayTime to mins:sec instead of milliseconds
+function formatPlayTime(milliseconds) {
+
+	var minutes = Math.floor(milliseconds / 60000);
+	var seconds = ((milliseconds % 60000) / 1000).toFixed(0);
+
+	//returning minutes : seconds format, if seconds is less than 10 display '0' else display empty string '', plus seconds
+	return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
+
+
+//issues:
+//currentPlayTime starts as -1:-01 instead at 00:00
+//some milliseconds delay between currentPlayTime and currentTime
