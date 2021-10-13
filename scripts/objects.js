@@ -1,21 +1,23 @@
-import {
-	time
-} from "./script.js";
+// import {
+// 	time
+// } from "./script.js";
 
-const monster = {
-	startDate: '',
-	endDate: '',
-	currentTime: time,
-	aliveTime: '',
-	neededSleep: 8,
-	actualSleep: '',
-	neededFood: 4,
-	currentFood: '',
-	neededPlayTime: 2, //two clicks
-	currentPlayTime: '',
-	moodHappy: true,
-}
+// const monster = {
+// 	startDate: '',
+// 	endDate: '',
+// 	currentTime: time,
+// 	aliveTime: '',
+// 	neededSleep: 8,
+// 	actualSleep: '',
+// 	neededFood: 4,
+// 	currentFood: 4,
+// 	neededPlayTime: 2, //two clicks
+// 	currentPlayTime: '',
+// 	moodHappy: true,
+// }
 
-localStorage.setItem("monster", JSON.stringify(monster));
+// localStorage.setItem("monster", JSON.stringify(monster));
 
-console.log(time);
+// console.log(time);
+
+// function 

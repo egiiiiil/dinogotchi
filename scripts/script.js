@@ -1,4 +1,3 @@
-
 //change background image depending on the time
 
 var currentTime = new Date().getHours();
@@ -11,12 +10,16 @@ if (document.body) {
 }
 
 let time
+let mins
+let secs
+let date
+let epochCurrentTime
 
 let clock = () => {
-	let date = new Date();
+	date = new Date();
 	let hrs = date.getHours();
-	let mins = date.getMinutes();
-	let secs = date.getSeconds();
+	mins = date.getMinutes();
+	secs = date.getSeconds();
 	let period = "AM";
 	if (hrs == 0) {
 		hrs = 12;
@@ -30,14 +33,16 @@ let clock = () => {
 
 	time = `${hrs}:${mins}:${secs}:${period}`;
 	document.getElementById("clock").innerText = time;
+	epochCurrentTime = date.getTime();
+	console.log(epochCurrentTime);
 	setTimeout(clock, 1000);
-};
 
+}
 clock();
 
-export {
-	time as time
-};
+// export {
+// 	time as time
+// };
 
 //button dissapear on click
 const startBtn = document.getElementById('btn');
@@ -45,9 +50,50 @@ const startBtn = document.getElementById('btn');
 function btnHide() {
 	startBtn.style.display = "none";
 
+	setStartDate();
+	calculateCurrentPlayTime();
+
 }
 
 startBtn.addEventListener("click", btnHide);
 
 
-//show three other button
+
+const monster = {
+	startDate: '',
+	endDate: '',
+	currentTime: time,
+	aliveTime: '',
+	neededSleep: 8,
+	actualSleep: '',
+	neededFood: 4,
+	currentFood: 4,
+	neededPlayTime: 2, //two clicks
+	currentPlayTime: '',
+	moodHappy: true,
+}
+
+localStorage.setItem("monster", JSON.stringify(monster));
+
+console.log(time);
+
+
+let epochGameStartTime
+//connecting start time of the game to startDate and sending it to local storage
+function setStartDate() {
+	let gameStartDate = new Date();
+	monster.startDate = gameStartDate;
+
+
+	epochGameStartTime = gameStartDate.getTime()
+
+	console.log(epochGameStartTime, "poop")
+
+	localStorage.setItem("monster", JSON.stringify(monster));
+}
+
+function calculateCurrentPlayTime() {
+	monster.currentPlayTime = epochCurrentTime - epochGameStartTime;
+	console.log(monster.currentPlayTime, "number");
+	setTimeout(calculateCurrentPlayTime, 1000);
+}
