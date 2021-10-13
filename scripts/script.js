@@ -1,4 +1,3 @@
-
 //change background image depending on the time
 
 var currentTime = new Date().getHours();
@@ -43,27 +42,30 @@ export {
 const startBtn = document.getElementById('btn');
 const mainTag = document.getElementsByTagName('main')[0];
 
-startBtn.addEventListener("click", function btnHide(){
+startBtn.addEventListener("click", function btnHide() {
 	startBtn.style.display = "none";
+	//Div which helps to wrap buttons and to define their position
+	const divWrapper = document.createElement("div");
+	divWrapper.id="div__wrapper";
 
-  const feedBtn = document.createElement("button");
-  feedBtn.classList.add("feed___btn");
-  feedBtn.innerHTML="FEED";
+	const feedBtn = document.createElement("button");
+	feedBtn.id="feed___btn";
+	feedBtn.innerHTML = "FEED";
 
-  const playBtn = document.createElement("button");
-  playBtn.classList.add("play___btn");
-  playBtn.innerHTML= "PLAY";
+	const playBtn = document.createElement("button");
+	playBtn.id="play___btn";
+	playBtn.innerHTML = "PLAY";
 
-  const petBtn = document.createElement("button");
-  petBtn.classList.add("pet___btn");
-  petBtn.innerHTML="PET";
+	const petBtn = document.createElement("button");
+	petBtn.id="pet___btn";
+	petBtn.innerHTML = "PET";
+  mainTag.appendChild(divWrapper);
 
-  mainTag.appendChild(feedBtn);
-  mainTag.appendChild(playBtn);
-  mainTag.appendChild(petBtn);
-  
+	divWrapper.appendChild(feedBtn);
+	divWrapper.appendChild(playBtn);
+	divWrapper.appendChild(petBtn);
+
 });
 
 
 //show three other button
-

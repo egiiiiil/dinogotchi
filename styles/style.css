@@ -28,6 +28,10 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -webkit-box-pack: center;
@@ -57,7 +61,24 @@ main img {
   padding: 30px;
 }
 
-.play___btn {
+#feed___btn {
   margin: 1rem;
+}
+
+#play___btn {
+  margin: 1rem;
+}
+
+#pet___btn {
+  margin: 1rem;
+}
+
+#div__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: space-between;
+      -ms-flex-align: space-between;
+          align-items: space-between;
 }
 /*# sourceMappingURL=style.css.map */

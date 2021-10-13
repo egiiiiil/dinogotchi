@@ -22,6 +22,7 @@ main {
 main {
 
 	display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
 	justify-content: center;
 	align-content: space-around;
@@ -40,7 +41,7 @@ main {
 	background-color: white;
 	padding: 100px;
 }
-
+// BUTTONS***********************
 #btn {
 	border: none;
 	font-size: 1.5rem;
@@ -48,6 +49,21 @@ main {
 	padding: 30px;
 }
 
-.play___btn{
+
+#feed___btn{
   margin: 1rem;
+
+}
+
+#play___btn{
+  margin: 1rem;
+}
+
+#pet___btn{
+  margin: 1rem;
+}
+
+#div__wrapper{
+display: flex;
+align-items:space-between;
 }
