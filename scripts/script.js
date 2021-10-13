@@ -4,9 +4,9 @@
 var currentTime = new Date().getHours();
 if (document.body) {
 	if (7 <= currentTime && currentTime < 20) {
-		document.body.background = "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2832&q=80";
+		document.body.style.background = "yellow";
 	} else {
-		document.body.background = "https://images.unsplash.com/photo-1488866022504-f2584929ca5f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1762&q=80";
+		document.body.style.background = "blue";
 	}
 }
 
@@ -39,15 +39,31 @@ export {
 	time as time
 };
 
-//button dissapear on click
-const startBtn = document.getElementById('btn');
 
-function btnHide() {
+const startBtn = document.getElementById('btn');
+const mainTag = document.getElementsByTagName('main')[0];
+
+startBtn.addEventListener("click", function btnHide(){
 	startBtn.style.display = "none";
 
-}
+  const feedBtn = document.createElement("button");
+  feedBtn.classList.add("feed___btn");
+  feedBtn.innerHTML="FEED";
 
-startBtn.addEventListener("click", btnHide);
+  const playBtn = document.createElement("button");
+  playBtn.classList.add("play___btn");
+  playBtn.innerHTML= "PLAY";
+
+  const petBtn = document.createElement("button");
+  petBtn.classList.add("pet___btn");
+  petBtn.innerHTML="PET";
+
+  mainTag.appendChild(feedBtn);
+  mainTag.appendChild(playBtn);
+  mainTag.appendChild(petBtn);
+  
+});
 
 
 //show three other button
+

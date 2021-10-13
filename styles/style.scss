@@ -22,7 +22,8 @@ main {
 main {
 
 	display: flex;
-	justify-content: space-around;
+  flex-wrap: wrap;
+	justify-content: center;
 	align-content: space-around;
 	align-items: center;
 	width: 100%;
@@ -45,4 +46,8 @@ main {
 	font-size: 1.5rem;
 	background-color: red;
 	padding: 30px;
+}
+
+.play___btn{
+  margin: 1rem;
 }
