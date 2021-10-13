@@ -2,6 +2,12 @@ body {
 	background-size: 100%;
 }
 
+body,
+html,
+main {
+	height: 100%;
+}
+
 #clock {
 	height: auto;
 	width: auto;
@@ -13,18 +19,29 @@ body {
 }
 
 main {
-	background-color: white;
-	border-style: solid;
-	display: inline-block;
-	width: 50vw;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	left: 5%;
+
+	display: flex;
+	justify-content: space-around;
+	align-content: space-around;
+	align-items: center;
+	width: 100%;
+
 
 
 	img {
-		width: 90%;
-		height: 80%;
+		width: 100%;
+
 	}
+}
+
+.image {
+	background-color: white;
+	padding: 100px;
+}
+
+#btn {
+	border: none;
+	font-size: 1.5rem;
+	background-color: red;
+	padding: 30px;
 }

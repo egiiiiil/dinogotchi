@@ -7,6 +7,7 @@ if (document.body) {
 		document.body.background = "https://images.unsplash.com/photo-1488866022504-f2584929ca5f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1762&q=80";
 	}
 }
+let time
 
 let clock = () => {
 	let date = new Date();
@@ -24,9 +25,26 @@ let clock = () => {
 	mins = mins < 10 ? "0" + mins : mins;
 	secs = secs < 10 ? "0" + secs : secs;
 
-	let time = `${hrs}:${mins}:${secs}:${period}`;
+	time = `${hrs}:${mins}:${secs}:${period}`;
 	document.getElementById("clock").innerText = time;
 	setTimeout(clock, 1000);
 };
 
 clock();
+
+export {
+	time as time
+};
+
+//button dissapear on click
+const startBtn = document.getElementById('btn');
+
+function btnHide() {
+	startBtn.style.display = "none";
+
+}
+
+startBtn.addEventListener("click", btnHide);
+
+
+//show three other button
