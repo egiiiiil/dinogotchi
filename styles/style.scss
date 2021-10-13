@@ -1,3 +1,48 @@
 body {
 	background-size: 100%;
 }
+
+
+body,
+html,
+main {
+	height: 100%;
+}
+
+#clock {
+	height: auto;
+	width: auto;
+	color: #e9eb9e;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 50px;
+}
+
+main {
+
+	display: flex;
+	justify-content: space-around;
+	align-content: space-around;
+	align-items: center;
+	width: 100%;
+
+
+
+	img {
+		width: 100%;
+
+	}
+}
+
+.image {
+	background-color: white;
+	padding: 100px;
+}
+
+#btn {
+	border: none;
+	font-size: 1.5rem;
+	background-color: red;
+	padding: 30px;
+}
