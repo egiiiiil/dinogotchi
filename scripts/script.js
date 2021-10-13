@@ -51,3 +51,14 @@ startBtn.addEventListener("click", btnHide);
 
 
 //show three other button
+let playTime = () => {
+	let getObj = localStorage.getItem('monster');
+	let parseJSON = JSON.parse(getObj);
+	let svgHTML = document.getElementById('eyes');
+	if (parseJSON.moodHappy == !true) {
+		svgHTML.innerHTML = '<path d="M16 9L9 2L2 9" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
+	} else {
+		svgHTML.innerHTML = '<path d="M5.5 10C7.98528 10 10 7.98528 10 5.5C10 3.01472 7.98528 1 5.5 1C3.01472 1 1 3.01472 1 5.5C1 7.98528 3.01472 10 5.5 10Z" fill="black" stroke="black" stroke-width="2" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
+	}
+}
+playTime();

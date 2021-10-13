@@ -12,45 +12,39 @@ main {
   height: auto;
   width: auto;
   color: #e9eb9e;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   font-size: 50px;
 }
 
 main {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -ms-flex-line-pack: distribute;
-      align-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  display: grid;
+  grid-template-columns: 70% 30%;
   width: 100%;
+  height: 90%;
 }
-
 main img {
   width: 100%;
 }
 
-.image {
+.image-wrapper {
   background-color: white;
-  padding: 100px;
+}
+.image-wrapper .image {
+  width: 100%;
 }
 
-#btn {
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.button-wrapper #btn {
   border: none;
   font-size: 1.5rem;
   background-color: red;
-  padding: 30px;
+  width: 10em;
+  height: 3em;
 }
+
 /*# sourceMappingURL=style.css.map */
