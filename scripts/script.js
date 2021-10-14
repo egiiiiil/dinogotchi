@@ -3,11 +3,12 @@
 var currentTime = new Date().getHours();
 if (document.body) {
 	if (7 <= currentTime && currentTime < 20) {
-		document.body.style.background = 'url("../image/day.jpg")';
+		document.body.style.backgroundColor = "#ffed48";
 	} else {
-		document.body.style.background = 'url("../image/night.jpg")';
+		document.body.style.backgroundColor = "#4c48ff";
 	}
 }
+
 
 
 
@@ -89,7 +90,7 @@ const monster = {
 	neededSleep: 8,
 	actualSleep: '',
 	neededFood: 4,
-	currentFood: 4,
+	currentFood: 8,
 	neededPlayTime: 2, //two clicks
 	currentPlayTime: '',
 	moodHappy: true,
@@ -161,47 +162,42 @@ let playTime = () => {
 }
 // playTime();
 
+
+// Function to make the monster hungry over time
+// TODO replace "3000" with the variable to be ab;e to change it later
+function hungerInterval() {
+	let currentFood = monster.currentFood
+	for (let i = currentFood; i > 0; i--) {
+		setTimeout(function timer() {
+			currentFood -= 1
+			localStorage.setItem("monster", JSON.stringify(monster));
+			monster.currentFood = currentFood
+			console.log(currentFood)
+			hungerEyes();
+
+		}, i * 3000)
+		//	the "i * 3000" makes it work with delay
+	}
+}
+
+hungerInterval()
+
+
 let hungerEyes = () => {
-	let getObj = localStorage.getItem('monster');
-	let parseJSON = JSON.parse(getObj);
+	let currentFood = monster.currentFood
+
 	let svgHTML = document.getElementById('eyes');
-	if (parseJSON.currentFood === 0) {
+	if (currentFood === 0) {
 		console.log('dead');
 		svgHTML.innerHTML = `<path fill-rule="evenodd" clip-rule="evenodd" d="M2.43854 2L11.4385 11L2.43854 2Z" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>
 		<path fill-rule="evenodd" clip-rule="evenodd" d="M11 2L2 11L11 2Z" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>`
-	} else if (parseJSON.currentFood < 4 && parseJSON.currentFood >= 1) {
+	} else if (currentFood < 4 && currentFood >= 1) {
 		console.log('angry');
 		svgHTML.innerHTML = `<path d="M12.5 18C14.9853 18 17 15.9853 17 13.5C17 11.0147 14.9853 9 12.5 9C10.0147 9 8 11.0147 8 13.5C8 15.9853 10.0147 18 12.5 18Z" fill="black" stroke="black" stroke-width="2" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>
 			<path d="M16 2L2 9" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>`;
-	} else if (parseJSON.currentFood === 4) {
+	} else if (currentFood >= 4) {
 		console.log('happy');
 		svgHTML.innerHTML = '<path d="M16 9L9 2L2 9" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
 
 	}
 }
-// hungerEyes();
-// let currentFood
-// let hungerTimer = () => {
-// 	while (monster.currentFood === 4) {}
-// 	currentFood = monster.currentFood - 1;
-// 	setInterval(hungerTimer, 1000);
-// }
-// hungerTimer();
-
-function counter() {
-	var i = 4;
-	let currentFood = monster.currentFood;
-	// This block will be executed 100 times.
-	setInterval(function () {
-		if (i == -1) {
-			clearInterval(this);
-
-		} else {
-			console.log('Currently at ' + (i--));
-			(currentFood--);
-		}
-	}, 1000);
-	localStorage.setItem("monster", JSON.stringify(monster));
-} // End
-
-counter()
