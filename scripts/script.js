@@ -3,11 +3,12 @@
 var currentTime = new Date().getHours();
 if (document.body) {
 	if (7 <= currentTime && currentTime < 20) {
-		document.body.background = "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2832&q=80";
+		document.body.style.background = 'url("../image/day.jpg")';
 	} else {
-		document.body.background = "https://images.unsplash.com/photo-1488866022504-f2584929ca5f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1762&q=80";
+		document.body.style.background = 'url("../image/night.jpg")';
 	}
 }
+
 
 
 // declared outside of clock function bc we wanted to use them in another functions too 
@@ -16,6 +17,7 @@ let mins
 let secs
 let date
 let epochCurrentTime
+
 
 //function displaying on the screen current time 
 let clock = () => {
@@ -48,19 +50,43 @@ clock();
 // };
 
 
-//button dissapear on click
+// BUTTONS***********************************************
 const startBtn = document.getElementById('btn');
+const mainTag = document.getElementsByTagName('main')[0];
 
-function btnHide() {
+//show three other button
+startBtn.addEventListener("click", function btnHide() {
 	startBtn.style.display = "none";
+
 	//when clicked run these functions
 	setStartDate();
 	calculateCurrentPlayTime();
 
-}
+	//Div which helps to wrap buttons and to define their position
+	const divWrapper = document.createElement("div");
+	divWrapper.id = "div__wrapper";
 
-startBtn.addEventListener("click", btnHide);
+	const feedBtn = document.createElement("button");
+	feedBtn.id = "btn__feed";
+	feedBtn.innerHTML = "FEED";
 
+	const playBtn = document.createElement("button");
+	playBtn.id = "btn__play";
+	playBtn.innerHTML = "PLAY";
+
+	const petBtn = document.createElement("button");
+	petBtn.id = "btn__pet";
+	petBtn.innerHTML = "PET";
+	mainTag.appendChild(divWrapper);
+
+	divWrapper.appendChild(feedBtn);
+	divWrapper.appendChild(playBtn);
+	divWrapper.appendChild(petBtn);
+
+  feedBtn.classList.add("btn__game");
+  playBtn.classList.add("btn__game");
+  petBtn.classList.add("btn__game");
+});
 
 //monster object
 const monster = {

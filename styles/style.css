@@ -5,7 +5,7 @@ body {
 body,
 html,
 main {
-  height: 100%;
+  height: 100vh;
 }
 
 #clock {
@@ -28,18 +28,20 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -ms-flex-line-pack: distribute;
       align-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100%;
-}
-
-main img {
-  width: 100%;
 }
 
 .image {
@@ -47,10 +49,35 @@ main img {
   padding: 100px;
 }
 
+.btn__game {
+  padding: 2%;
+}
+
 #btn {
   border: none;
   font-size: 1.5rem;
   background-color: red;
   padding: 30px;
+}
+
+#btn__feed {
+  margin: 1rem;
+}
+
+#btn__play {
+  margin: 1rem;
+}
+
+#btn__pet {
+  margin: 1rem;
+}
+
+#div__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: space-between;
+      -ms-flex-align: space-between;
+          align-items: space-between;
 }
 /*# sourceMappingURL=style.css.map */
