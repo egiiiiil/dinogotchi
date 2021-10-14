@@ -162,7 +162,8 @@ let playTime = () => {
 
 
 // Function to make the monster hungry over time
-function hungerTimer() {
+// TODO replace "3000" with the variable to be ab;e to change it later
+function hungerInterval() {
 	let currentFood = monster.currentFood
 	for (let i = currentFood; i > 0; i--) {
 		setTimeout(function timer(){
@@ -177,7 +178,7 @@ function hungerTimer() {
 	}
 }
 
-hungerTimer()
+hungerInterval()
 
 
 let hungerEyes = () => {
