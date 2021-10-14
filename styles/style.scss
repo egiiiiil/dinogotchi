@@ -33,8 +33,18 @@ main {
 }
 
 .image-wrapper {
-	background-color: white;
+	background-color: transparent;
 	padding: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.button-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
 }
 
 // BUTTONS***********************
@@ -42,6 +52,8 @@ main {
 .btn__game {
 	//To style all btns
 	padding: 2%;
+	margin: 1rem;
+
 }
 
 #btn {
@@ -51,37 +63,10 @@ main {
 	padding: 30px;
 }
 
-#btn__feed {
-	margin: 1rem;
-}
-
-#btn__play {
-	margin: 1rem;
-}
-
-#btn__pet {
-	margin: 1rem;
-}
-
-#div__wrapper {
-	display: flex;
-	align-items: space-between;
-}
 
 .image {
 	width: 100%;
 }
 
 
-.button-wrapper {
-	display: flex;
-	justify-content: center;
 
-	#btn {
-		border: none;
-		font-size: 1.5rem;
-		background-color: red;
-		width: 10em;
-		height: 3em;
-	}
-}
