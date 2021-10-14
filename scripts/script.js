@@ -3,13 +3,13 @@
 var currentTime = new Date().getHours();
 if (document.body) {
 	if (7 <= currentTime && currentTime < 20) {
-		document.body.style.background = "yellow";
+		document.body.style.background = 'url("../image/day.jpg")';
 	} else {
-		document.body.style.background = "blue";
+		document.body.style.background = 'url("../image/night.jpg")';
 	}
 }
 
-let time
+let time;
 
 let clock = () => {
 	let date = new Date();
@@ -38,34 +38,33 @@ export {
 	time as time
 };
 
-
+// BUTTONS***********************************************
 const startBtn = document.getElementById('btn');
 const mainTag = document.getElementsByTagName('main')[0];
 
+//show three other button
 startBtn.addEventListener("click", function btnHide() {
 	startBtn.style.display = "none";
 	//Div which helps to wrap buttons and to define their position
 	const divWrapper = document.createElement("div");
-	divWrapper.id="div__wrapper";
+	divWrapper.id = "div__wrapper";
 
 	const feedBtn = document.createElement("button");
-	feedBtn.id="feed___btn";
+	feedBtn.id = "feed___btn";
 	feedBtn.innerHTML = "FEED";
 
 	const playBtn = document.createElement("button");
-	playBtn.id="play___btn";
+	playBtn.id = "play___btn";
 	playBtn.innerHTML = "PLAY";
 
 	const petBtn = document.createElement("button");
-	petBtn.id="pet___btn";
+	petBtn.id = "pet___btn";
 	petBtn.innerHTML = "PET";
-  mainTag.appendChild(divWrapper);
+	mainTag.appendChild(divWrapper);
 
 	divWrapper.appendChild(feedBtn);
 	divWrapper.appendChild(playBtn);
 	divWrapper.appendChild(petBtn);
-
 });
 
 
-//show three other button

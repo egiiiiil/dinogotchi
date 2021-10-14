@@ -6,7 +6,7 @@ body {
 body,
 html,
 main {
-	height: 100%;
+	height: 100vh;
 }
 
 #clock {
@@ -27,12 +27,11 @@ main {
 	justify-content: center;
 	align-content: space-around;
 	align-items: center;
-	width: 100%;
-
+	// width: 100%;
 
 
 	img {
-		width: 100%;
+		// width: 100%;
 
 	}
 }
