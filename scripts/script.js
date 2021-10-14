@@ -11,7 +11,7 @@ if (document.body) {
 
 
 
-// declared outside of clock function bc we wanted to use them in another functions too 
+// declared outside of clock function bc we wanted to use them in another functions too
 let time
 let mins
 let secs
@@ -19,7 +19,7 @@ let date
 let epochCurrentTime
 
 
-//function displaying on the screen current time 
+//function displaying on the screen current time
 let clock = () => {
 	date = new Date();
 	let hrs = date.getHours();
@@ -62,9 +62,8 @@ startBtn.addEventListener("click", function btnHide() {
 	setStartDate();
 	calculateCurrentPlayTime();
 
-	//Div which helps to wrap buttons and to define their position
-	const divWrapper = document.createElement("div");
-	divWrapper.id = "div__wrapper";
+	// Select the wrapper to put buttons in
+	const btnWrapper = document.querySelector(".button-wrapper")
 
 	const feedBtn = document.createElement("button");
 	feedBtn.id = "btn__feed";
@@ -74,18 +73,11 @@ startBtn.addEventListener("click", function btnHide() {
 	playBtn.id = "btn__play";
 	playBtn.innerHTML = "PLAY";
 
-	const petBtn = document.createElement("button");
-	petBtn.id = "btn__pet";
-	petBtn.innerHTML = "PET";
-	mainTag.appendChild(divWrapper);
-
-	divWrapper.appendChild(feedBtn);
-	divWrapper.appendChild(playBtn);
-	divWrapper.appendChild(petBtn);
-
 	feedBtn.classList.add("btn__game");
 	playBtn.classList.add("btn__game");
-	petBtn.classList.add("btn__game");
+
+	btnWrapper.append(feedBtn)
+	btnWrapper.append(playBtn)
 });
 
 //monster object
