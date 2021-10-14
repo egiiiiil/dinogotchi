@@ -2,7 +2,6 @@ body {
 	background-size: 100%;
 }
 
-
 body,
 html,
 main {
@@ -20,19 +19,16 @@ main {
 }
 
 main {
-
 	display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+	flex-direction: column;
+	flex-wrap: wrap;
 	justify-content: center;
 	align-content: space-around;
 	align-items: center;
 	// width: 100%;
 
-
 	img {
 		// width: 100%;
-
 	}
 }
 
@@ -41,6 +37,12 @@ main {
 	padding: 100px;
 }
 // BUTTONS***********************
+
+.btn__game {
+  //To style all btns
+	padding: 2%;
+}
+
 #btn {
 	border: none;
 	font-size: 1.5rem;
@@ -48,21 +50,19 @@ main {
 	padding: 30px;
 }
 
-
-#feed___btn{
-  margin: 1rem;
-
+#btn__feed {
+	margin: 1rem;
 }
 
-#play___btn{
-  margin: 1rem;
+#btn__play {
+	margin: 1rem;
 }
 
-#pet___btn{
-  margin: 1rem;
+#btn__pet {
+	margin: 1rem;
 }
 
-#div__wrapper{
-display: flex;
-align-items:space-between;
+#div__wrapper {
+	display: flex;
+	align-items: space-between;
 }

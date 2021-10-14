@@ -49,6 +49,10 @@ main {
   padding: 100px;
 }
 
+.btn__game {
+  padding: 2%;
+}
+
 #btn {
   border: none;
   font-size: 1.5rem;
@@ -56,15 +60,15 @@ main {
   padding: 30px;
 }
 
-#feed___btn {
+#btn__feed {
   margin: 1rem;
 }
 
-#play___btn {
+#btn__play {
   margin: 1rem;
 }
 
-#pet___btn {
+#btn__pet {
   margin: 1rem;
 }
 

@@ -50,21 +50,25 @@ startBtn.addEventListener("click", function btnHide() {
 	divWrapper.id = "div__wrapper";
 
 	const feedBtn = document.createElement("button");
-	feedBtn.id = "feed___btn";
+	feedBtn.id = "btn__feed";
 	feedBtn.innerHTML = "FEED";
 
 	const playBtn = document.createElement("button");
-	playBtn.id = "play___btn";
+	playBtn.id = "btn__play";
 	playBtn.innerHTML = "PLAY";
 
 	const petBtn = document.createElement("button");
-	petBtn.id = "pet___btn";
+	petBtn.id = "btn__pet";
 	petBtn.innerHTML = "PET";
 	mainTag.appendChild(divWrapper);
 
 	divWrapper.appendChild(feedBtn);
 	divWrapper.appendChild(playBtn);
 	divWrapper.appendChild(petBtn);
+
+  feedBtn.classList.add("btn__game");
+  playBtn.classList.add("btn__game");
+  petBtn.classList.add("btn__game");
 });
 
 
