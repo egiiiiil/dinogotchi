@@ -83,9 +83,9 @@ startBtn.addEventListener("click", function btnHide() {
 	divWrapper.appendChild(playBtn);
 	divWrapper.appendChild(petBtn);
 
-  feedBtn.classList.add("btn__game");
-  playBtn.classList.add("btn__game");
-  petBtn.classList.add("btn__game");
+	feedBtn.classList.add("btn__game");
+	playBtn.classList.add("btn__game");
+	petBtn.classList.add("btn__game");
 });
 
 //monster object
@@ -156,3 +156,15 @@ function formatPlayTime(milliseconds) {
 //issues:
 //currentPlayTime starts as -1:-01 instead at 00:00
 //some milliseconds delay between currentPlayTime and currentTime
+//show three other button
+let playTime = () => {
+	let getObj = localStorage.getItem('monster');
+	let parseJSON = JSON.parse(getObj);
+	let svgHTML = document.getElementById('eyes');
+	if (parseJSON.moodHappy == !true) {
+		svgHTML.innerHTML = '<path d="M16 9L9 2L2 9" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
+	} else {
+		svgHTML.innerHTML = '<path d="M5.5 10C7.98528 10 10 7.98528 10 5.5C10 3.01472 7.98528 1 5.5 1C3.01472 1 1 3.01472 1 5.5C1 7.98528 3.01472 10 5.5 10Z" fill="black" stroke="black" stroke-width="2" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
+	}
+}
+playTime();
