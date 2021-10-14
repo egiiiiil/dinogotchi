@@ -29,8 +29,21 @@ main {
   display: grid;
   -ms-grid-columns: 70% 30%;
       grid-template-columns: 70% 30%;
+  justify-items: center;
   width: 100%;
   height: 90%;
+}
+
+main #div__barP {
+  width: 8rem;
+  height: 2rem;
+  background-color: white;
+}
+
+main #div__barC {
+  width: 100%;
+  height: 2rem;
+  background-color: green;
 }
 
 .image-wrapper {
