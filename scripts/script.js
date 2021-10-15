@@ -55,6 +55,7 @@ clock();
 const startBtn = document.getElementById('btn');
 const mainTag = document.getElementsByTagName('main')[0];
 
+
 //show three other button
 startBtn.addEventListener("click", function btnHide() {
 	startBtn.style.display = "none";
@@ -64,7 +65,7 @@ startBtn.addEventListener("click", function btnHide() {
 	calculateCurrentPlayTime();
 
 	// Select the wrapper to put buttons in
-	const btnWrapper = document.querySelector(".button-wrapper")
+	const btnWrapper = document.querySelector(".button-wrapper");
 
 	const feedBtn = document.createElement("button");
 	feedBtn.id = "btn__feed";
@@ -73,12 +74,33 @@ startBtn.addEventListener("click", function btnHide() {
 	const playBtn = document.createElement("button");
 	playBtn.id = "btn__play";
 	playBtn.innerHTML = "PLAY";
+	// FOOD BAR
+	let barWrapper = document.createElement("div");
+
+  let barFoodText = document.createElement("p");
+	barFoodText.innerHTML = "FOOD";
+	let feedBarDivParent = document.createElement("div");
+	feedBarDivParent.id = "div__barP";
+	let feedBarDivChild = document.createElement("div");
+	feedBarDivChild.id = "div__barC";
+
+
+
+
 
 	feedBtn.classList.add("btn__game");
 	playBtn.classList.add("btn__game");
 
-	btnWrapper.append(feedBtn)
-	btnWrapper.append(playBtn)
+	btnWrapper.append(feedBtn);
+	btnWrapper.append(playBtn);
+	mainTag.appendChild(barWrapper);
+	barWrapper.appendChild(feedBarDivParent);
+	barWrapper.appendChild(barFoodText);
+	feedBarDivParent.appendChild(feedBarDivChild);
+
+	playBtn.addEventListener("click", playBtnF);
+	hungerInterval();
+
 });
 
 //monster object
@@ -90,7 +112,7 @@ const monster = {
 	neededSleep: 8,
 	actualSleep: '',
 	neededFood: 4,
-	currentFood: 8,
+	currentFood: 10,
 	neededPlayTime: 2, //two clicks
 	currentPlayTime: '',
 	moodHappy: true,
@@ -127,10 +149,11 @@ function setStartDate() {
 let milliseconds
 
 function calculateCurrentPlayTime() {
-	milliseconds = epochCurrentTime - epochGameStartTime;
+	milliseconds = Date.now() - epochGameStartTime;
 	monster.currentPlayTime = formatPlayTime(milliseconds);
 	setTimeout(calculateCurrentPlayTime, 1000);
 	localStorage.setItem("monster", JSON.stringify(monster));
+	// console.log(monster.currentPlayTime);
 }
 
 
@@ -150,28 +173,46 @@ function formatPlayTime(milliseconds) {
 //currentPlayTime starts as -1:-01 instead at 00:00
 //some milliseconds delay between currentPlayTime and currentTime
 //show three other button
+let getObj = localStorage.getItem('monster');
+let parseJSON = JSON.parse(getObj);
+let svgHTML = document.getElementById('eyes');
+
 let playTime = () => {
-	let getObj = localStorage.getItem('monster');
-	let parseJSON = JSON.parse(getObj);
-	let svgHTML = document.getElementById('eyes');
 	if (parseJSON.moodHappy == !true) {
 		svgHTML.innerHTML = '<path d="M16 9L9 2L2 9" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
 	} else {
 		svgHTML.innerHTML = '<path d="M5.5 10C7.98528 10 10 7.98528 10 5.5C10 3.01472 7.98528 1 5.5 1C3.01472 1 1 3.01472 1 5.5C1 7.98528 3.01472 10 5.5 10Z" fill="black" stroke="black" stroke-width="2" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
 	}
 }
+
 // playTime();
+
+function playBtnF() {
+	// console.log("happy");
+	// setTimeout(function(){
+	//   console.log("sad");
+	// }, 5000);
+	svgHTML.innerHTML = '<path d="M16 9L9 2L2 9" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
+	setTimeout(function () {
+		svgHTML.innerHTML = '<path d="M56.5 34C58.9853 34 61 31.9853 61 29.5C61 27.0147 58.9853 25 56.5 25C54.0147 25 52 27.0147 52 29.5C52 31.9853 54.0147 34 56.5 34Z" fill="black" stroke="black" stroke-width="2" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"></path>';
+	}, 3000);
+}
+// console.log(document.getElementById("btn__play"));
+
 
 
 // Function to make the monster hungry over time
-// TODO replace "3000" with the variable to be ab;e to change it later
+// TODO replace "3000" with the variable to be able to change it later
+
 function hungerInterval() {
 	let currentFood = monster.currentFood
 	for (let i = currentFood; i > 0; i--) {
 		setTimeout(function timer() {
-			currentFood -= 1
-			localStorage.setItem("monster", JSON.stringify(monster));
+			currentFood -= 1;
+			document.getElementById("div__barC").style.width = 100 * currentFood / 10 + "%";
+			console.log(100 * currentFood / 10 + "%");
 			monster.currentFood = currentFood
+			localStorage.setItem("monster", JSON.stringify(monster));
 			console.log(currentFood)
 			hungerEyes();
 
@@ -180,11 +221,11 @@ function hungerInterval() {
 	}
 }
 
-hungerInterval()
+// hungerInterval()
 
 
 let hungerEyes = () => {
-	let currentFood = monster.currentFood
+	let currentFood = monster.currentFood;
 
 	let svgHTML = document.getElementById('eyes');
 	if (currentFood === 0) {
