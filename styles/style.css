@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 body {
   background-size: 100%;
+  margin: 0;
 }
 
 body,
@@ -9,8 +11,10 @@ main {
 }
 
 #clock {
+  font-family: "VT323", monospace;
   height: auto;
   width: auto;
+  color: #2b2b2b;
   color: #e9eb9e;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -27,6 +31,22 @@ main {
 main {
   display: -ms-grid;
   display: grid;
+  grid-template-columns: 60% 30%;
+  width: 100%;
+  height: 90%;
+}
+@media screen and (max-width: 827px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
+.image-wrapper {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
   -ms-grid-columns: 70% 30%;
       grid-template-columns: 70% 30%;
   justify-items: center;
@@ -65,6 +85,10 @@ main #div__barC {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -83,10 +107,29 @@ main #div__barC {
 }
 
 #btn {
-  border: none;
-  font-size: 1.5rem;
-  background-color: red;
-  padding: 30px;
+  font-family: "VT323", monospace;
+  font-size: 2em;
+  height: 2.5em;
+  width: 7em;
+  background: #FFFFFF;
+  border: 4px solid #000000;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.btn__game {
+  font-family: "VT323", monospace;
+  font-size: 2em;
+  height: 2.5em;
+  width: 7em;
+  background: #FFFFFF;
+  border: 4px solid #000000;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  box-sizing: border-box;
 }
 
 .image {
