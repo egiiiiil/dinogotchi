@@ -9,9 +9,6 @@ if (document.body) {
 	}
 }
 
-
-
-
 // declared outside of clock function bc we wanted to use them in another functions too
 let time
 let mins
@@ -27,12 +24,14 @@ let clock = () => {
 	mins = date.getMinutes();
 	secs = date.getSeconds();
 	let period = "AM";
+
 	if (hrs == 0) {
 		hrs = 12;
 	} else if (hrs >= 12) {
 		hrs = hrs - 12;
 		period = "PM";
 	}
+
 	hrs = hrs < 10 ? "0" + hrs : hrs;
 	mins = mins < 10 ? "0" + mins : mins;
 	secs = secs < 10 ? "0" + secs : secs;
@@ -43,6 +42,7 @@ let clock = () => {
 	setTimeout(clock, 1000);
 
 }
+
 clock();
 
 //*export in case if we'll use separate files*
@@ -55,11 +55,10 @@ clock();
 const startBtn = document.getElementById('btn');
 const mainTag = document.getElementsByTagName('main')[0];
 const monsterPicture = document.querySelector(".image-wrapper");
+
 // Select the wrapper to put buttons in
 const btnWrapper = document.querySelector(".button-wrapper");
 
-
-//show three other button
 startBtn.addEventListener("click", function btnHide() {
 	startBtn.style.display = "none";
 
@@ -74,6 +73,8 @@ startBtn.addEventListener("click", function btnHide() {
 	const feedBtn = document.createElement("button");
 	feedBtn.id = "btn__feed";
 	feedBtn.innerHTML = "FEED";
+
+	feedBtn.addEventListener("click", feedBtnF);
 
 	const playBtn = document.createElement("button");
 	playBtn.id = "btn__play";
@@ -93,19 +94,20 @@ startBtn.addEventListener("click", function btnHide() {
 });
 
 function CreateBar(objectValue, className, text, divClassName) {
+	//div-wrapper
 	let div = document.createElement("div");
 	div.classList.add(divClassName);
 
-	let variable = document.createElement("meter");
+	// Create a label
 	let label = document.createElement("label");
-	// Label
 	label.setAttribute("for", className);
 	label.classList.add(className + "Label");
-
 	label.innerHTML = text;
-	//meter
+
+	// create a meter
+	let variable = document.createElement("meter");
 	variable.setAttribute("min", "0");
-	variable.setAttribute("max", "10");
+	variable.setAttribute("max", maxFood.toString());
 	variable.setAttribute("value", objectValue.toString());
 	variable.classList.add(className);
 
@@ -130,6 +132,9 @@ const monster = {
 	moodHappy: true,
 }
 
+//Limit for food bar. So you can't give more than 10 food items.
+const maxFood = 10;
+
 //push monster object to local storage
 localStorage.setItem("monster", JSON.stringify(monster));
 
@@ -144,7 +149,7 @@ function updateCurrentTime() {
 updateCurrentTime();
 
 //Epoch time = milliseconds that have passed since midnight on January 1st, 1970
-let epochGameStartTime
+let epochGameStartTime;
 
 //connecting start time of the game to startDate and sending it to local storage
 function setStartDate() {
@@ -157,8 +162,9 @@ function setStartDate() {
 	localStorage.setItem("monster", JSON.stringify(monster));
 }
 
+
 //this variable will be assigned to actual millisecods of play time (difference between epochCurrentTime and epochGameStartTime)
-let milliseconds
+let milliseconds;
 
 function calculateCurrentPlayTime() {
 	milliseconds = Date.now() - epochGameStartTime;
@@ -167,7 +173,6 @@ function calculateCurrentPlayTime() {
 	localStorage.setItem("monster", JSON.stringify(monster));
 	// console.log(monster.currentPlayTime);
 }
-
 
 
 //reformatting currentPlayTime to mins:sec instead of milliseconds
@@ -181,10 +186,6 @@ function formatPlayTime(milliseconds) {
 }
 
 
-//issues:
-//currentPlayTime starts as -1:-01 instead at 00:00
-//some milliseconds delay between currentPlayTime and currentTime
-//show three other button
 let getObj = localStorage.getItem('monster');
 let parseJSON = JSON.parse(getObj);
 let svgHTML = document.getElementById('eyes');
@@ -197,40 +198,39 @@ let playTime = () => {
 	}
 }
 
-// playTime();
-
 function playBtnF() {
 	svgHTML.innerHTML = '<path d="M16 9L9 2L2 9" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
 	setTimeout(function () {
 		svgHTML.innerHTML = '<path d="M56.5 34C58.9853 34 61 31.9853 61 29.5C61 27.0147 58.9853 25 56.5 25C54.0147 25 52 27.0147 52 29.5C52 31.9853 54.0147 34 56.5 34Z" fill="black" stroke="black" stroke-width="2" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"></path>';
 	}, 3000);
 }
-// console.log(document.getElementById("btn__play"));
 
-
+function feedBtnF() {
+	if (monster.currentFood < maxFood) {
+		monster.currentFood++;
+		localStorage.setItem("monster", JSON.stringify(monster));
+		document.getElementsByClassName("foodBar")[0].value = monster.currentFood;
+	}
+}
 
 // Function to make the monster hungry over time
 // TODO replace "3000" with the variable to be able to change it later
 
+//REMOVED for loop because it executes the code only fixed number of times (10). Otherwise the monster stops to be hungry and never dies.
+// REMOVED variable which stored the monster.currentFood , because we don't need it.
 function hungerInterval() {
-	let currentFood = monster.currentFood
-	for (let i = currentFood; i > 0; i--) {
-		setTimeout(function timer() {
-			currentFood -= 1;
-			document.getElementsByClassName("foodBar")[0].value = currentFood;
-			console.log(100 * currentFood / 10 + "%");
-			monster.currentFood = currentFood
-			localStorage.setItem("monster", JSON.stringify(monster));
-			console.log(currentFood)
-			hungerEyes();
+	setTimeout(function timer() {
+		monster.currentFood--;
+		document.getElementsByClassName("foodBar")[0].value = monster.currentFood;
+		localStorage.setItem("monster", JSON.stringify(monster));
+		console.log(monster.currentFood);
+		hungerEyes();
 
-		}, i * 3000)
-		//	the "i * 3000" makes it work with delay
-	}
+		if (monster.currentFood > 0) {
+			hungerInterval();
+		}
+	}, 3000);
 }
-
-// hungerInterval()
-
 
 let hungerEyes = () => {
 	let currentFood = monster.currentFood;
@@ -247,6 +247,5 @@ let hungerEyes = () => {
 	} else if (currentFood >= 4) {
 		console.log('happy');
 		svgHTML.innerHTML = '<path d="M64 33L57 26L50 33" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
-
 	}
 }
