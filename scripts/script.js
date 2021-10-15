@@ -54,6 +54,9 @@ clock();
 // BUTTONS***********************************************
 const startBtn = document.getElementById('btn');
 const mainTag = document.getElementsByTagName('main')[0];
+const monsterPicture = document.querySelector(".image-wrapper");
+// Select the wrapper to put buttons in
+const btnWrapper = document.querySelector(".button-wrapper");
 
 
 //show three other button
@@ -64,8 +67,9 @@ startBtn.addEventListener("click", function btnHide() {
 	setStartDate();
 	calculateCurrentPlayTime();
 
-	// Select the wrapper to put buttons in
-	const btnWrapper = document.querySelector(".button-wrapper");
+	// FOOD BAR
+	let foodBar = CreateBar(monster.currentFood, "foodBar", "Food", "bar-wrapper");
+	monsterPicture.append(foodBar);
 
 	const feedBtn = document.createElement("button");
 	feedBtn.id = "btn__feed";
@@ -74,34 +78,42 @@ startBtn.addEventListener("click", function btnHide() {
 	const playBtn = document.createElement("button");
 	playBtn.id = "btn__play";
 	playBtn.innerHTML = "PLAY";
-	// FOOD BAR
-	let barWrapper = document.createElement("div");
-
-  let barFoodText = document.createElement("p");
-	barFoodText.innerHTML = "FOOD";
-	let feedBarDivParent = document.createElement("div");
-	feedBarDivParent.id = "div__barP";
-	let feedBarDivChild = document.createElement("div");
-	feedBarDivChild.id = "div__barC";
-
-
-
 
 
 	feedBtn.classList.add("btn__game");
 	playBtn.classList.add("btn__game");
 
+
 	btnWrapper.append(feedBtn);
 	btnWrapper.append(playBtn);
-	mainTag.appendChild(barWrapper);
-	barWrapper.appendChild(feedBarDivParent);
-	barWrapper.appendChild(barFoodText);
-	feedBarDivParent.appendChild(feedBarDivChild);
 
 	playBtn.addEventListener("click", playBtnF);
 	hungerInterval();
 
 });
+
+function CreateBar(objectValue, className, text, divClassName) {
+	let div = document.createElement("div");
+	div.classList.add(divClassName);
+
+	let variable = document.createElement("meter");
+	let label = document.createElement("label");
+	// Label
+	label.setAttribute("for", className);
+	label.classList.add(className + "Label");
+
+	label.innerHTML = text;
+	//meter
+	variable.setAttribute("min", "0");
+	variable.setAttribute("max", "10");
+	variable.setAttribute("value", objectValue.toString());
+	variable.classList.add(className);
+
+	div.append(label);
+	div.append(variable);
+
+	return div;
+}
 
 //monster object
 const monster = {
@@ -188,10 +200,6 @@ let playTime = () => {
 // playTime();
 
 function playBtnF() {
-	// console.log("happy");
-	// setTimeout(function(){
-	//   console.log("sad");
-	// }, 5000);
 	svgHTML.innerHTML = '<path d="M16 9L9 2L2 9" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
 	setTimeout(function () {
 		svgHTML.innerHTML = '<path d="M56.5 34C58.9853 34 61 31.9853 61 29.5C61 27.0147 58.9853 25 56.5 25C54.0147 25 52 27.0147 52 29.5C52 31.9853 54.0147 34 56.5 34Z" fill="black" stroke="black" stroke-width="2" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"></path>';
@@ -209,7 +217,7 @@ function hungerInterval() {
 	for (let i = currentFood; i > 0; i--) {
 		setTimeout(function timer() {
 			currentFood -= 1;
-			document.getElementById("div__barC").style.width = 100 * currentFood / 10 + "%";
+			document.getElementsByClassName("foodBar")[0].value = currentFood;
 			console.log(100 * currentFood / 10 + "%");
 			monster.currentFood = currentFood
 			localStorage.setItem("monster", JSON.stringify(monster));
