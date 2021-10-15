@@ -35,6 +35,18 @@ main {
 	img {
 		// width: 100%;
 	}
+
+  #div__barP{
+    width: 8rem;
+    height: 2rem;
+    background-color: white;
+  }
+
+  #div__barC{
+    width: 100%;
+    height: 2rem;
+    background-color: green;
+  }
 }
 @media screen and (max-width: 827px) {
 	main {
