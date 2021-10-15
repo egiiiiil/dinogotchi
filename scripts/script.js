@@ -59,11 +59,11 @@ const mainTag = document.getElementsByTagName('main')[0];
 //show three other button
 startBtn.addEventListener("click", function btnHide() {
 	startBtn.style.display = "none";
-
+	checkForMonsterObject();
 	//when clicked run these functions
 	setStartDate();
 	calculateCurrentPlayTime();
-
+	updateCurrentTime();
 	// Select the wrapper to put buttons in
 	const btnWrapper = document.querySelector(".button-wrapper");
 
@@ -76,7 +76,7 @@ startBtn.addEventListener("click", function btnHide() {
 	playBtn.innerHTML = "PLAY";
 	// FOOD BAR
 	let barWrapper = document.createElement("div");
-
+	barWrapper.classList.add('meter')
   let barFoodText = document.createElement("p");
 	barFoodText.innerHTML = "FOOD";
 	let feedBarDivParent = document.createElement("div");
@@ -103,23 +103,44 @@ startBtn.addEventListener("click", function btnHide() {
 
 });
 
-//monster object
-const monster = {
-	startDate: '',
-	endDate: '',
-	currentTime: '',
-	aliveTime: '',
-	neededSleep: 8,
-	actualSleep: '',
-	neededFood: 4,
-	currentFood: 10,
-	neededPlayTime: 2, //two clicks
-	currentPlayTime: '',
-	moodHappy: true,
+
+
+
+
+let monster = {};
+
+function checkForMonsterObject() {
+	if (localStorage.getItem('monster')) {
+		monster = localStorage.getItem('monster')
+		console.log('something')
+	} else {
+		createMonsterObject()
+		console.log('nothing')
+	}
+
+}
+function createMonsterObject() {
+	
+	//monster object
+	monster = {
+		startDate: '',
+		endDate: '',
+		currentTime: '',
+		aliveTime: '',
+		neededSleep: 8,
+		actualSleep: '',
+		neededFood: 4,
+		currentFood: 10,
+		neededPlayTime: 2, //two clicks
+		currentPlayTime: '',
+		moodHappy: true,
+	}
+	
+	//push monster object to local storage
+	localStorage.setItem("monster", JSON.stringify(monster));
+
 }
 
-//push monster object to local storage
-localStorage.setItem("monster", JSON.stringify(monster));
 
 //function updating current time in monster object(3rd key)
 function updateCurrentTime() {
@@ -129,7 +150,7 @@ function updateCurrentTime() {
 	//pushing into local storage
 	localStorage.setItem("monster", JSON.stringify(monster));
 }
-updateCurrentTime();
+
 
 //Epoch time = milliseconds that have passed since midnight on January 1st, 1970
 let epochGameStartTime
@@ -178,7 +199,7 @@ let parseJSON = JSON.parse(getObj);
 let svgHTML = document.getElementById('eyes');
 
 let playTime = () => {
-	if (parseJSON.moodHappy == !true) {
+	if (parseJSON.moodHappy == true) {
 		svgHTML.innerHTML = '<path d="M16 9L9 2L2 9" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
 	} else {
 		svgHTML.innerHTML = '<path d="M5.5 10C7.98528 10 10 7.98528 10 5.5C10 3.01472 7.98528 1 5.5 1C3.01472 1 1 3.01472 1 5.5C1 7.98528 3.01472 10 5.5 10Z" fill="black" stroke="black" stroke-width="2" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
