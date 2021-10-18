@@ -11,11 +11,10 @@ main {
 }
 
 #clock {
-  font-family: "VT323", monospace;
+  font-family: 'VT323', monospace;
   height: auto;
   width: auto;
   color: #2b2b2b;
-  color: #e9eb9e;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -31,44 +30,21 @@ main {
 main {
   display: -ms-grid;
   display: grid;
-  grid-template-columns: 60% 30%;
+  -ms-grid-columns: 60% 30%;
+      grid-template-columns: 60% 30%;
   width: 100%;
   height: 90%;
 }
+
 @media screen and (max-width: 827px) {
   main {
-    grid-template-columns: 1fr;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
   }
 }
-.image-wrapper {
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1em;
-  -ms-grid-columns: 70% 30%;
-      grid-template-columns: 70% 30%;
-  justify-items: center;
-  width: 100%;
-  height: 90%;
-}
-
-main #div__barP {
-  width: 8rem;
-  height: 2rem;
-  background-color: white;
-}
-
-main #div__barC {
-  width: 100%;
-  height: 2rem;
-  background-color: green;
-}
 
 .image-wrapper {
   background-color: transparent;
-  padding: 100px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -79,16 +55,35 @@ main #div__barC {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1em;
+}
+
+.bar-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.foodBar {
+  font-size: 2em;
+  margin: 0.5em;
+}
+
+.foodBarLabel {
+  font-size: 2em;
+  margin: 0.5em;
 }
 
 .button-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -96,9 +91,9 @@ main #div__barC {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .btn__game {
@@ -107,27 +102,31 @@ main #div__barC {
 }
 
 #btn {
-  font-family: "VT323", monospace;
+  font-family: 'VT323', monospace;
   font-size: 2em;
   height: 2.5em;
   width: 7em;
   background: #FFFFFF;
   border: 4px solid #000000;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   box-sizing: border-box;
 }
 
 .btn__game {
-  font-family: "VT323", monospace;
+  font-family: 'VT323', monospace;
   font-size: 2em;
   height: 2.5em;
   width: 7em;
   background: #FFFFFF;
   border: 4px solid #000000;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   box-sizing: border-box;
 }
