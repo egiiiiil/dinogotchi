@@ -246,6 +246,7 @@ function formatPlayTime(milliseconds) {
 //currentPlayTime starts as -1:-01 instead at 00:00
 //some milliseconds delay between currentPlayTime and currentTime
 //show three other button
+//TODO the code below looks unused
 let getObj = localStorage.getItem("monster");
 let parseJSON = JSON.parse(getObj);
 let svgHTML = document.getElementById("eyes");
@@ -301,6 +302,7 @@ function hungerInterval() {
 	}, 3000);
 }
 
+//TODO this hungerEyes function gets values from monster object in code, not from LS
 let hungerEyes = () => {
 	let currentFood = monster.currentFood;
 
