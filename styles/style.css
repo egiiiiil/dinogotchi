@@ -12,120 +12,129 @@ main {
 }
 
 #clock {
-  font-family: 'VT323', monospace;
+  font-family: "VT323", monospace;
   height: auto;
   width: auto;
   color: #2b2b2b;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   font-size: 50px;
 }
 
 main {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 60% 30%;
-      grid-template-columns: 60% 30%;
+  grid-template-columns: 60% 30%;
   width: 100%;
   height: 90%;
 }
-
 @media screen and (max-width: 827px) {
   main {
-    -ms-grid-columns: 1fr;
-        grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
   }
 }
-
 .image-wrapper {
   background-color: transparent;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 1em;
 }
 
 .bar-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
+  width: 14em;
 }
 
-.foodBar {
-  font-size: 2em;
-  margin: 0.5em;
-  /* Reset appearance */
-  border: 1px solid #ccc;
-  border-radius: 15px;
-}
-
-meter {
-  width: 7em;
-  height: 50px;
-  padding: 0;
-  border: 5px solid #f00;
-  border-radius: 15px;
+/* .foodBar {
+	font-size: 2em;
+	margin: 0.5em;
+	// -webkit-appearance: none;
+	//Reset appearance
+	border: 1px solid #ccc;
+	border-radius: 15px;
+} */
+/* meter {
+	width: 7em;
+	height: 50px;
+	padding: 0;
+	border: 4px solid $black-color;
+	border-radius: 15px;
+	-webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+	background: rgb(83, 56, 56);
 }
 
 meter::-webkit-meter-bar {
-  background: #ccc;
-  border-radius: 15px;
+	background: none; //Required to get rid of the default background property
+  background: #86CC00;
+	border-radius: 15px;
 }
-
 meter::-webkit-meter-optimum-value {
-  background: #0a0;
+	background: #86CC00;
 }
-
 meter::-moz-meter-bar {
-  background: #0a0;
+	background: #86CC00;
+	border-radius: 15px;
 }
 
 meter {
-  -webkit-box-shadow: 0px 0px 0px 5px #f00;
-          box-shadow: 0px 0px 0px 5px #f00;
+	box-shadow: 0px 0px 0px 4px $black-color;
+} */
+meter {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 30px;
+  /* For Firefox */
+  background: #EEE;
+  border-radius: 5px;
+  border: 4px solid #000000;
+  flex-grow: 1;
+  margin-left: 1em;
 }
 
-meter .foodBarLabel {
-  margin: 0.5em;
-  font-family: 'VT323', monospace;
+/* WebKit */
+meter::-webkit-meter-bar {
+  background: #EEE;
+  border-radius: 5px;
+}
+
+meter::-webkit-meter-optimum-value,
+meter::-webkit-meter-suboptimum-value,
+meter::-webkit-meter-even-less-good-value {
+  border-radius: 4px;
+}
+
+meter::-webkit-meter-optimum-value {
+  background: #86CC00;
+}
+
+/* Firefox */
+meter::-moz-meter-bar {
+  /* border-radius: 3px; */
+}
+
+meter:-moz-meter-optimum::-moz-meter-bar {
+  background: #86CC00;
+  border-radius: 0px;
+}
+
+.foodBarLabel {
+  font-family: "VT323", monospace;
   font-size: 2.5rem;
   text-transform: uppercase;
 }
 
 .button-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn__game {
@@ -134,31 +143,27 @@ meter .foodBarLabel {
 }
 
 #btn {
-  font-family: 'VT323', monospace;
+  font-family: "VT323", monospace;
   font-size: 2.5rem;
   height: 2.5em;
   width: 7em;
   background: #FFFFFF;
   border: 4px solid #000000;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   box-sizing: border-box;
 }
 
 .btn__game {
-  font-family: 'VT323', monospace;
+  font-family: "VT323", monospace;
   font-size: 2.5rem;
   height: 2.5em;
   width: 7em;
   background: #FFFFFF;
   border: 4px solid #000000;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   box-sizing: border-box;
 }
@@ -168,106 +173,45 @@ meter .foodBarLabel {
 }
 
 #front-arm {
-  -webkit-animation-name: front-arm;
-          animation-name: front-arm;
-  -webkit-animation-duration: 1s;
-          animation-duration: 1s;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-}
-
-@-webkit-keyframes front-arm {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-    -webkit-transform-origin: center;
-            transform-origin: center;
-  }
-  50% {
-    -webkit-transform: rotate(5deg);
-            transform: rotate(5deg);
-    -webkit-transform-origin: center;
-            transform-origin: center;
-  }
-  100% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-    -webkit-transform-origin: center;
-            transform-origin: center;
-  }
+  animation-name: front-arm;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }
 
 @keyframes front-arm {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-    -webkit-transform-origin: center;
-            transform-origin: center;
+    transform: rotate(0deg);
+    transform-origin: center;
   }
   50% {
-    -webkit-transform: rotate(5deg);
-            transform: rotate(5deg);
-    -webkit-transform-origin: center;
-            transform-origin: center;
+    transform: rotate(5deg);
+    transform-origin: center;
   }
   100% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-    -webkit-transform-origin: center;
-            transform-origin: center;
+    transform: rotate(0deg);
+    transform-origin: center;
   }
 }
-
 #back-arm {
-  -webkit-animation-name: back-arm;
-          animation-name: back-arm;
-  -webkit-animation-duration: 1s;
-          animation-duration: 1s;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-delay: 0.5s;
-          animation-delay: 0.5s;
-}
-
-@-webkit-keyframes back-arm {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-    -webkit-transform-origin: center;
-            transform-origin: center;
-  }
-  50% {
-    -webkit-transform: rotate(5deg);
-            transform: rotate(5deg);
-    -webkit-transform-origin: center;
-            transform-origin: center;
-  }
-  100% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-    -webkit-transform-origin: center;
-            transform-origin: center;
-  }
+  animation-name: back-arm;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-delay: 0.5s;
 }
 
 @keyframes back-arm {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-    -webkit-transform-origin: center;
-            transform-origin: center;
+    transform: rotate(0deg);
+    transform-origin: center;
   }
   50% {
-    -webkit-transform: rotate(5deg);
-            transform: rotate(5deg);
-    -webkit-transform-origin: center;
-            transform-origin: center;
+    transform: rotate(5deg);
+    transform-origin: center;
   }
   100% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-    -webkit-transform-origin: center;
-            transform-origin: center;
+    transform: rotate(0deg);
+    transform-origin: center;
   }
 }
+
 /*# sourceMappingURL=style.css.map */
