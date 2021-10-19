@@ -63,22 +63,32 @@ const monsterPhrases = [
 	//If dead
 	["Well, too late now...", "Okay, now I'm dead.", "Goodbye cruel world..."],
 	//On click feed button (maybe)
-	["Tastes good!", "Thank you!"],
+	["Tastes good!", "*crunches food*", "Thank you!"],
 ];
+
+function getRandomNumber(max) {
+	return Math.floor(Math.random() * max);
+}
 
 function monsterSays(monsterStatus) {
 	const monsterSpeech = document.getElementById("monsterSpeech");
+	let phraseNumber;
 
 	if (monsterStatus === "start") {
-		monsterSpeech.innerHTML = monsterPhrases[0][0];
+		phraseNumber = getRandomNumber(3);
+		monsterSpeech.innerHTML = monsterPhrases[0][phraseNumber];
 	} else if (monsterStatus === "happy") {
-		monsterSpeech.innerHTML = monsterPhrases[1][0];
+		phraseNumber = getRandomNumber(3);
+		monsterSpeech.innerHTML = monsterPhrases[1][phraseNumber];
 	} else if (monsterStatus === "angry") {
-		monsterSpeech.innerHTML = monsterPhrases[2][0];
+		phraseNumber = getRandomNumber(3);
+		monsterSpeech.innerHTML = monsterPhrases[2][phraseNumber];
 	} else if (monsterStatus === "dead") {
-		monsterSpeech.innerHTML = monsterPhrases[3][0];
+		phraseNumber = getRandomNumber(3);
+		monsterSpeech.innerHTML = monsterPhrases[3][phraseNumber];
 	} else if (monsterStatus === "fed") {
-		monsterSpeech.innerHTML = monsterPhrases[4][0];
+		phraseNumber = getRandomNumber(3);
+		monsterSpeech.innerHTML = monsterPhrases[4][phraseNumber];
 	} else if (monsterStatus === "silent") {
 		monsterSpeech.innerHTML = "";
 	}
