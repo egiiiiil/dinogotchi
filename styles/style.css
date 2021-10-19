@@ -98,4 +98,14 @@ main {
   width: 100%;
 }
 
+#front-arm {
+  transform: rotate(5deg);
+  transform-origin: center;
+}
+
+#back-arm {
+  transform: rotate(5deg);
+  transform-origin: center;
+}
+
 /*# sourceMappingURL=style.css.map */
