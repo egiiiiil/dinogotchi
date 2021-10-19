@@ -66,8 +66,9 @@ const monsterPhrases = [
 	["Tastes good!", "*crunches food*", "Thank you!"],
 ];
 
-function getRandomNumber(max) {
-	return Math.floor(Math.random() * max);
+const numberOfPhrases = 3;
+function getRandomNumber(numberOfPhrases) {
+	return Math.floor(Math.random() * numberOfPhrases);
 }
 
 function monsterSays(monsterStatus) {
@@ -75,19 +76,19 @@ function monsterSays(monsterStatus) {
 	let phraseNumber;
 
 	if (monsterStatus === "start") {
-		phraseNumber = getRandomNumber(3);
+		phraseNumber = getRandomNumber(numberOfPhrases);
 		monsterSpeech.innerHTML = monsterPhrases[0][phraseNumber];
 	} else if (monsterStatus === "happy") {
-		phraseNumber = getRandomNumber(3);
+		phraseNumber = getRandomNumber(numberOfPhrases);
 		monsterSpeech.innerHTML = monsterPhrases[1][phraseNumber];
 	} else if (monsterStatus === "angry") {
-		phraseNumber = getRandomNumber(3);
+		phraseNumber = getRandomNumber(numberOfPhrases);
 		monsterSpeech.innerHTML = monsterPhrases[2][phraseNumber];
 	} else if (monsterStatus === "dead") {
-		phraseNumber = getRandomNumber(3);
+		phraseNumber = getRandomNumber(numberOfPhrases);
 		monsterSpeech.innerHTML = monsterPhrases[3][phraseNumber];
 	} else if (monsterStatus === "fed") {
-		phraseNumber = getRandomNumber(3);
+		phraseNumber = getRandomNumber(numberOfPhrases);
 		monsterSpeech.innerHTML = monsterPhrases[4][phraseNumber];
 	} else if (monsterStatus === "silent") {
 		monsterSpeech.innerHTML = "";
