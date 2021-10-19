@@ -53,14 +53,36 @@ const monsterPhrases = [
 	//On page load
 	["Let's play!", "Start the game already!", "Press that button!"],
 	//If happy
-	["Oh I'm happy right now!", "I like this game!"],
+	[
+		"I'm so happy right now!",
+		"I like this game!",
+		"It's fun to play with you!",
+	],
 	//If angry
-	["I'm so hungry!", "Give me that food!"],
+	["I'm so hungry!", "Give me that food!", "I'm starving!"],
 	//If dead
 	["Well, too late now...", "Okay, now I'm dead.", "Goodbye cruel world..."],
 	//On click feed button (maybe)
-	["Thank you!"],
+	["Tastes good!", "Thank you!"],
 ];
+
+function monsterSays(monsterStatus) {
+	const monsterSpeech = document.getElementById("monsterSpeech");
+
+	if (monsterStatus === "start") {
+		monsterSpeech.innerHTML = monsterPhrases[0][0];
+	} else if (monsterStatus === "happy") {
+		monsterSpeech.innerHTML = monsterPhrases[1][0];
+	} else if (monsterStatus === "angry") {
+		monsterSpeech.innerHTML = monsterPhrases[2][0];
+	} else if (monsterStatus === "dead") {
+		monsterSpeech.innerHTML = monsterPhrases[3][0];
+	} else if (monsterStatus === "fed") {
+		monsterSpeech.innerHTML = monsterPhrases[4][0];
+	} else if (monsterStatus === "silent") {
+		monsterSpeech.innerHTML = "";
+	}
+}
 
 //==========MONSTER TALK END
 
@@ -117,6 +139,7 @@ function createAndShowGameButtons() {
 
 function startGame() {
 	//when start game button is clicked run these functions
+	monsterSays("silent");
 	hideStartButton();
 	createMonsterObject();
 	createAndShowGameButtons();
@@ -147,6 +170,8 @@ function checkForMonsterObject() {
 		continueGame();
 	} else {
 		showStartButton();
+		//Show monster message before game starts
+		monsterSays("start");
 		console.log("nothing");
 	}
 }
@@ -253,6 +278,7 @@ function feedBtnF() {
 		monster.currentFood++;
 		localStorage.setItem("monster", JSON.stringify(monster));
 		document.getElementsByClassName("foodBar")[0].value = monster.currentFood;
+		monsterSays("fed");
 	}
 }
 
@@ -281,14 +307,17 @@ let hungerEyes = () => {
 	let svgHTML = document.getElementById("eyes");
 	if (currentFood === 0) {
 		console.log("dead");
+		monsterSays("dead");
 		svgHTML.innerHTML = `<path fill-rule="evenodd" clip-rule="evenodd" d="M52.4385 25L61.4385 34L52.4385 25Z" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M61 25L52 34L61 25Z" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>`;
 	} else if (currentFood < 4 && currentFood >= 1) {
 		console.log("angry");
+		monsterSays("angry");
 		svgHTML.innerHTML = `<path d="M56.5 34C58.9853 34 61 31.9853 61 29.5C61 27.0147 58.9853 25 56.5 25C54.0147 25 52 27.0147 52 29.5C52 31.9853 54.0147 34 56.5 34Z" fill="black" stroke="black" stroke-width="2" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M60 18L46 25" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>`;
 	} else if (currentFood >= 4) {
 		console.log("happy");
+		monsterSays("happy");
 		svgHTML.innerHTML =
 			'<path d="M64 33L57 26L50 33" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
 	}
