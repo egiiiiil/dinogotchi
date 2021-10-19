@@ -22,7 +22,7 @@ main {
 	align-items: center;
 	justify-content: center;
 	font-size: 50px;
-	
+
 }
 
 main {
@@ -36,8 +36,8 @@ main {
 		// width: 100%;
 	}
 
-  
-  
+
+
 }
 @media screen and (max-width: 827px) {
 	main {
@@ -113,5 +113,13 @@ main {
 
 }
 
-
+#monsterSpeech {
+	background: white;
+	border-radius: 50px;
+	border: 4px solid black;
+	padding: 10px 20px;
+	text-align: center;
+	font-family: 'VT323', monospace;
+	font-size: 2rem;
+}
 
