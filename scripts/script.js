@@ -114,7 +114,9 @@ const btnWrapper = document.querySelector(".button-wrapper");
 
 		//This updateCurrentTime() breaks logic
 		// updateCurrentTime();
-		hungerInterval();
+    if(monster.currentFood > 0){
+      hungerInterval();
+    }
 	}
 
 	startBtn.addEventListener("click", startGame);
@@ -122,8 +124,8 @@ const btnWrapper = document.querySelector(".button-wrapper");
 	let monster = {};
 
 	function checkForMonsterObject() {
-		if (localStorage.getItem("monster")) {
 			monster = JSON.parse(localStorage.getItem("monster"));
+		if (monster && monster.isAlive) {
 			console.log(monster);
 			console.log("something");
 			continueGame();
@@ -152,6 +154,7 @@ const btnWrapper = document.querySelector(".button-wrapper");
 			neededPlayTime: 2, //two clicks
 			currentPlayTime: "",
 			moodHappy: true,
+      isAlive: true,
 		};
 
 		//push monster object to local storage
@@ -221,10 +224,6 @@ const btnWrapper = document.querySelector(".button-wrapper");
 	};
 
 	function playBtnF() {
-		// console.log("happy");
-		// setTimeout(function(){
-		//   console.log("sad");
-		// }, 5000);
 		svgHTML.innerHTML =
 			'<path d="M16 9L9 2L2 9" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
 		setTimeout(function () {
@@ -257,6 +256,10 @@ const btnWrapper = document.querySelector(".button-wrapper");
 			if (monster.currentFood > 0) {
 				hungerInterval();
 			}
+
+      if(monster.currentFood==0){
+        monster.isAlive = false;
+      }
 		}, 3000);
 	}
 
