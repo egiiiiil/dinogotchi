@@ -50,8 +50,10 @@ clock();
 
 //==========MONSTER TALK START
 const monsterPhrases = [
-	//On page load
+	//If ready (on page load)
 	["Let's play!", "Start the game already!", "Press that button!"],
+	//If start (after the game started)
+	["Let's see...", "What do we got here?", "What's going on?"],
 	//If happy
 	[
 		"I'm so happy right now!",
@@ -62,7 +64,7 @@ const monsterPhrases = [
 	["I'm so hungry!", "Give me that food!", "I'm starving!"],
 	//If dead
 	["Well, too late now...", "Okay, now I'm dead.", "Goodbye cruel world..."],
-	//On click feed button (maybe)
+	//If fed (on click feed button)
 	["Tastes good!", "*crunches food*", "Thank you!"],
 ];
 
@@ -75,23 +77,24 @@ function monsterSays(monsterStatus) {
 	const monsterSpeech = document.getElementById("monsterSpeech");
 	let phraseNumber;
 
-	if (monsterStatus === "start") {
+	if (monsterStatus === "ready") {
 		phraseNumber = getRandomNumber(numberOfPhrases);
 		monsterSpeech.innerHTML = monsterPhrases[0][phraseNumber];
-	} else if (monsterStatus === "happy") {
+	} else if (monsterStatus === "start") {
 		phraseNumber = getRandomNumber(numberOfPhrases);
 		monsterSpeech.innerHTML = monsterPhrases[1][phraseNumber];
-	} else if (monsterStatus === "angry") {
+	} else if (monsterStatus === "happy") {
 		phraseNumber = getRandomNumber(numberOfPhrases);
 		monsterSpeech.innerHTML = monsterPhrases[2][phraseNumber];
-	} else if (monsterStatus === "dead") {
+	} else if (monsterStatus === "angry") {
 		phraseNumber = getRandomNumber(numberOfPhrases);
 		monsterSpeech.innerHTML = monsterPhrases[3][phraseNumber];
-	} else if (monsterStatus === "fed") {
+	} else if (monsterStatus === "dead") {
 		phraseNumber = getRandomNumber(numberOfPhrases);
 		monsterSpeech.innerHTML = monsterPhrases[4][phraseNumber];
-	} else if (monsterStatus === "silent") {
-		monsterSpeech.innerHTML = "";
+	} else if (monsterStatus === "fed") {
+		phraseNumber = getRandomNumber(numberOfPhrases);
+		monsterSpeech.innerHTML = monsterPhrases[5][phraseNumber];
 	}
 }
 
@@ -150,7 +153,7 @@ function createAndShowGameButtons() {
 
 function startGame() {
 	//when start game button is clicked run these functions
-	monsterSays("silent");
+	monsterSays("start");
 	hideStartButton();
 	createMonsterObject();
 	createAndShowGameButtons();
@@ -182,7 +185,7 @@ function checkForMonsterObject() {
 	} else {
 		showStartButton();
 		//Show monster message before game starts
-		monsterSays("start");
+		monsterSays("ready");
 		console.log("nothing");
 	}
 }
