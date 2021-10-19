@@ -59,6 +59,13 @@ function hideStartButton() {
 	startBtn.style.display = "none";
 }
 
+function hideBtn(btnName) {
+	let btn = document.querySelector(btnName);
+	if (btn) {
+		btn.style.display = "none";
+	}
+}
+
 function showStartButton() {
 	startBtn.style.display = "block";
 }
@@ -69,30 +76,37 @@ function createAndShowGameButtons() {
 	const btnWrapper = document.querySelector(".button-wrapper");
 
 	//feed btn
-  let feedBtn = document.getElementById("btn__feed");
-  if(!feedBtn){
-    feedBtn = createBtn("btn__feed", "FEED", "btn__game");
-    feedBtn.addEventListener("click", feedBtnF);
-    btnWrapper.append(feedBtn);
-  }
+	let feedBtn = document.getElementById("btn__feed");
+	if (!feedBtn) {
+		feedBtn = createBtn("btn__feed", "FEED", "btn__game");
+		feedBtn.addEventListener("click", feedBtnF);
+		btnWrapper.append(feedBtn);
+	} else {
+		feedBtn.style.display = "block";
+	}
 
 	console.log(monster.currentFood);
 
 	//Food bar
-  let foodBar = document.getElementsByClassName("foodBar")[0];
-  if(!foodBar){
-    let foodBar = CreateBar(monster.currentFood, "foodBar", "Food", "bar-wrapper");
-    monsterPicture.append(foodBar);
-  }
+	let foodBar = document.getElementsByClassName("foodBar")[0];
+	if (!foodBar) {
+		let foodBar = CreateBar(monster.currentFood, "foodBar", "Food", "bar-wrapper");
+		monsterPicture.append(foodBar);
+	} else {
+		foodBar.style.display = "block";
+		foodBar.setAttribute("value", monster.currentFood.toString());
+	}
 
 }
 
 
 
 function startGame() {
+	hideBtn("#btn__reset");
 	//when start game button is clicked run these functions
 	hideStartButton();
 	createMonsterObject();
+	hungerEyes();
 	createAndShowGameButtons();
 	setStartDate();
 	calculateCurrentPlayTime();
@@ -103,6 +117,7 @@ function startGame() {
 function continueGame() {
 	hideStartButton();
 	createAndShowGameButtons();
+  hungerEyes();
 
 	//This updateCurrentTime() breaks logic
 	// updateCurrentTime();
@@ -117,10 +132,15 @@ let monster = {};
 
 function checkForMonsterObject() {
 	monster = JSON.parse(localStorage.getItem("monster"));
-	if (monster && monster.isAlive) {
+	if (monster) {
 		console.log(monster);
 		console.log("something");
-		continueGame();
+		if (monster.currentFood > 0) {
+			continueGame();
+		} else {
+      resetBtnF();
+      hungerEyes();
+    }
 	} else {
 		showStartButton();
 		console.log("nothing");
@@ -146,7 +166,6 @@ function createMonsterObject() {
 		neededPlayTime: 2, //two clicks
 		currentPlayTime: "",
 		moodHappy: true,
-		isAlive: true,
 	};
 
 	//push monster object to local storage
@@ -232,14 +251,17 @@ function feedBtnF() {
 }
 
 function resetBtnF() {
-  document.getElementById("btn__feed").style.display = "none";
-  let resetBtn = document.getElementById("btn__reset");
+  hideBtn("#btn__feed");
+  hideBtn('#btn');
+	let resetBtn = document.getElementById("btn__reset");
 
-  if(!resetBtn){
-    resetBtn = createBtn("btn__reset", "RESET", "btn__game");
-    btnWrapper.append(resetBtn);
-    resetBtn.addEventListener("click", startGame);
-  }
+	if (!resetBtn) {
+		resetBtn = createBtn("btn__reset", "RESET", "btn__game");
+		btnWrapper.append(resetBtn);
+		resetBtn.addEventListener("click", startGame);
+	} else {
+		resetBtn.style.display = "block";
+	}
 }
 
 // Function to make the monster hungry over time
@@ -260,13 +282,12 @@ function hungerInterval() {
 		}
 
 		if (monster.currentFood == 0) {
-			monster.isAlive = false;
-      resetBtnF();
+			resetBtnF();
 		}
 	}, 1000);
 }
 
-let hungerEyes = () => {
+function hungerEyes(){
 	let currentFood = monster.currentFood;
 
 	let svgHTML = document.getElementById("eyes");
