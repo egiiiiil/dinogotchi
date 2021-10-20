@@ -129,12 +129,9 @@ function createAndShowGameButtons() {
 
 	feedBtn.addEventListener("click", feedBtnF);
 
-	const playBtn = document.createElement("button");
-	playBtn.id = "btn__play";
-	playBtn.innerHTML = "PLAY";
 
 	feedBtn.classList.add("btn__game");
-	playBtn.classList.add("btn__game");
+
 	let foodBar = CreateBar(
 		monster.currentFood,
 		"foodBar",
@@ -143,9 +140,8 @@ function createAndShowGameButtons() {
 	);
 	btnWrapper.append(foodBar);
 	btnWrapper.append(feedBtn);
-	btnWrapper.append(playBtn);
 
-	playBtn.addEventListener("click", playBtnF);
+
 
 	console.log(monster.currentFood);
 }
@@ -264,28 +260,7 @@ let getObj = localStorage.getItem("monster");
 let parseJSON = JSON.parse(getObj);
 let svgHTML = document.getElementById("eyes");
 
-let playTime = () => {
-	if (parseJSON.moodHappy == true) {
-		svgHTML.innerHTML =
-			'<path d="M16 9L9 2L2 9" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
-	} else {
-		svgHTML.innerHTML =
-			'<path d="M5.5 10C7.98528 10 10 7.98528 10 5.5C10 3.01472 7.98528 1 5.5 1C3.01472 1 1 3.01472 1 5.5C1 7.98528 3.01472 10 5.5 10Z" fill="black" stroke="black" stroke-width="2" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
-	}
-};
 
-function playBtnF() {
-	// console.log("happy");
-	// setTimeout(function(){
-	//   console.log("sad");
-	// }, 5000);
-	svgHTML.innerHTML =
-		'<path d="M16 9L9 2L2 9" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
-	setTimeout(function () {
-		svgHTML.innerHTML =
-			'<path d="M56.5 34C58.9853 34 61 31.9853 61 29.5C61 27.0147 58.9853 25 56.5 25C54.0147 25 52 27.0147 52 29.5C52 31.9853 54.0147 34 56.5 34Z" fill="black" stroke="black" stroke-width="2" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"></path>';
-	}, 3000);
-}
 
 function feedBtnF() {
 	if (monster.currentFood < maxFood) {
