@@ -1,7 +1,6 @@
 const maxFood = 10;
 //change background image depending on the time
 
-
 var currentTime = new Date().getHours();
 if (document.body) {
 	if (7 <= currentTime && currentTime < 20) {
@@ -49,15 +48,69 @@ clock();
 // 	time as time
 // };
 
+//==========MONSTER TALK START
+const monsterPhrases = [
+	//If ready (on page load)
+	["Let's play!", "Start the game already!", "Press that button!"],
+	//If start (after the game started)
+	["Let's see...", "What do we got here?", "What's going on?"],
+	//If happy
+	[
+		"I'm so happy right now!",
+		"I like this game!",
+		"It's fun to play with you!",
+	],
+	//If angry
+	["I'm so hungry!", "Give me that food!", "I'm starving!"],
+	//If dead
+	["Well, too late now...", "Okay, now I'm dead.", "Goodbye cruel world..."],
+	//If fed (on click feed button)
+	["Tastes good!", "*crunches food*", "Thank you!"],
+];
+
+const numberOfPhrases = 3;
+function getRandomNumber(numberOfPhrases) {
+	return Math.floor(Math.random() * numberOfPhrases);
+}
+
+function monsterSays(monsterStatus) {
+	const monsterSpeech = document.getElementById("monsterSpeech");
+	let phraseNumber;
+
+	if (monsterStatus === "ready") {
+		phraseNumber = getRandomNumber(numberOfPhrases);
+		monsterSpeech.innerHTML = monsterPhrases[0][phraseNumber];
+	} else if (monsterStatus === "start") {
+		phraseNumber = getRandomNumber(numberOfPhrases);
+		monsterSpeech.innerHTML = monsterPhrases[1][phraseNumber];
+	} else if (monsterStatus === "happy") {
+		phraseNumber = getRandomNumber(numberOfPhrases);
+		monsterSpeech.innerHTML = monsterPhrases[2][phraseNumber];
+	} else if (monsterStatus === "angry") {
+		phraseNumber = getRandomNumber(numberOfPhrases);
+		monsterSpeech.innerHTML = monsterPhrases[3][phraseNumber];
+	} else if (monsterStatus === "dead") {
+		phraseNumber = getRandomNumber(numberOfPhrases);
+		monsterSpeech.innerHTML = monsterPhrases[4][phraseNumber];
+	} else if (monsterStatus === "fed") {
+		phraseNumber = getRandomNumber(numberOfPhrases);
+		monsterSpeech.innerHTML = monsterPhrases[5][phraseNumber];
+	}
+}
+
+//==========MONSTER TALK END
+
 // BUTTONS***********************************************
-const startBtn = document.getElementById('btn');
-const mainTag = document.getElementsByTagName('main')[0];
+const startBtn = document.getElementById("btn");
+//TODO mainTag is never used
+const mainTag = document.getElementsByTagName("main")[0];
 const monsterPicture = document.querySelector(".image-wrapper");
+
+//TODO remove btnWrapper bc we have it inside the function createAndShowGameButtons
 
 // Select the wrapper to put buttons in
 const btnWrapper = document.querySelector(".button-wrapper");
 
-//=================NEW
 function hideStartButton() {
 	startBtn.style.display = "none";
 }
@@ -65,8 +118,6 @@ function hideStartButton() {
 function showStartButton() {
 	startBtn.style.display = "block";
 }
-
-
 
 function createAndShowGameButtons() {
 	// Select the wrapper to put buttons in
@@ -84,8 +135,12 @@ function createAndShowGameButtons() {
 
 	feedBtn.classList.add("btn__game");
 	playBtn.classList.add("btn__game");
-
-	let foodBar = CreateBar(monster.currentFood, "foodBar", "Food", "bar-wrapper");
+	let foodBar = CreateBar(
+		monster.currentFood,
+		"foodBar",
+		"Food",
+		"bar-wrapper"
+	);
 	btnWrapper.append(foodBar);
 	btnWrapper.append(feedBtn);
 	btnWrapper.append(playBtn);
@@ -93,12 +148,11 @@ function createAndShowGameButtons() {
 	playBtn.addEventListener("click", playBtnF);
 
 	console.log(monster.currentFood);
-	// monsterPicture.append(foodBar);
-
 }
 
 function startGame() {
 	//when start game button is clicked run these functions
+	monsterSays("start");
 	hideStartButton();
 	createMonsterObject();
 	createAndShowGameButtons();
@@ -129,13 +183,13 @@ function checkForMonsterObject() {
 		continueGame();
 	} else {
 		showStartButton();
+		//Show monster message before game starts
+		monsterSays("ready");
 		console.log("nothing");
 	}
 }
 
 checkForMonsterObject();
-
-//======================
 
 function createMonsterObject() {
 	//monster object
@@ -181,7 +235,6 @@ function setStartDate() {
 	localStorage.setItem("monster", JSON.stringify(monster));
 }
 
-
 //this variable will be assigned to actual millisecods of play time (difference between epochCurrentTime and epochGameStartTime)
 let milliseconds;
 
@@ -206,6 +259,7 @@ function formatPlayTime(milliseconds) {
 //currentPlayTime starts as -1:-01 instead at 00:00
 //some milliseconds delay between currentPlayTime and currentTime
 //show three other button
+//TODO the code below looks unused
 let getObj = localStorage.getItem("monster");
 let parseJSON = JSON.parse(getObj);
 let svgHTML = document.getElementById("eyes");
@@ -238,6 +292,7 @@ function feedBtnF() {
 		monster.currentFood++;
 		localStorage.setItem("monster", JSON.stringify(monster));
 		document.getElementsByClassName("foodBar")[0].value = monster.currentFood;
+		monsterSays("fed");
 	}
 }
 
@@ -260,27 +315,30 @@ function hungerInterval() {
 	}, 3000);
 }
 
+//TODO this hungerEyes function gets values from monster object in code, not from LS
 let hungerEyes = () => {
 	let currentFood = monster.currentFood;
 
 	let svgHTML = document.getElementById("eyes");
 	if (currentFood === 0) {
 		console.log("dead");
+		monsterSays("dead");
 		svgHTML.innerHTML = `<path fill-rule="evenodd" clip-rule="evenodd" d="M52.4385 25L61.4385 34L52.4385 25Z" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M61 25L52 34L61 25Z" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>`;
 	} else if (currentFood < 4 && currentFood >= 1) {
 		console.log("angry");
+		monsterSays("angry");
 		svgHTML.innerHTML = `<path d="M56.5 34C58.9853 34 61 31.9853 61 29.5C61 27.0147 58.9853 25 56.5 25C54.0147 25 52 27.0147 52 29.5C52 31.9853 54.0147 34 56.5 34Z" fill="black" stroke="black" stroke-width="2" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M60 18L46 25" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>`;
 	} else if (currentFood >= 4) {
 		console.log("happy");
+		monsterSays("happy");
 		svgHTML.innerHTML =
 			'<path d="M64 33L57 26L50 33" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
 	}
 };
 
 // FOOD BAR
-
 
 function CreateBar(objectValue, className, text, divClassName) {
 	//div-wrapper
