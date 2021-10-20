@@ -106,7 +106,7 @@ function startGame() {
 	//when start game button is clicked run these functions
 	hideStartButton();
 	createMonsterObject();
-	hungerEyes();
+	// hungerEyes();
 	createAndShowGameButtons();
 	setStartDate();
 	calculateCurrentPlayTime();
@@ -117,7 +117,7 @@ function startGame() {
 function continueGame() {
 	hideStartButton();
 	createAndShowGameButtons();
-  hungerEyes();
+  // hungerEyes();
 
 	//This updateCurrentTime() breaks logic
 	// updateCurrentTime();
