@@ -1,135 +1,256 @@
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+
 body {
-  background-size: 100%;
-  margin: 0;
+	background-size: 100%;
+	margin: 0;
+	font-size: 20px;
 }
 
 body,
 html,
 main {
-  height: 100vh;
+	height: 100vh;
 }
 
 #clock {
-  font-family: 'VT323', monospace;
-  height: auto;
-  width: auto;
-  color: #2b2b2b;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  font-size: 50px;
+	font-family: 'VT323', monospace;
+	height: auto;
+	width: auto;
+	color: #2b2b2b;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	font-size: 50px;
 }
 
 main {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 60% 30%;
-      grid-template-columns: 60% 30%;
-  width: 100%;
-  height: 90%;
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 60% 30%;
+	grid-template-columns: 60% 30%;
+	width: 100%;
+	height: 90%;
 }
 
 @media screen and (max-width: 827px) {
-  main {
-    -ms-grid-columns: 1fr;
-        grid-template-columns: 1fr;
-  }
+	main {
+		-ms-grid-columns: 1fr;
+		grid-template-columns: 1fr;
+	}
 }
 
 .image-wrapper {
-  background-color: transparent;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 1em;
+	background-color: transparent;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	padding: 1em;
 }
 
 .bar-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
+	width: 14em;
 }
 
-.foodBar {
-  font-size: 2em;
-  margin: 0.5em;
+/* .foodBar {
+	font-size: 2em;
+	margin: 0.5em;
+	// -webkit-appearance: none;
+	//Reset appearance
+	border: 1px solid #ccc;
+	border-radius: 15px;
+} */
+/* meter {
+	width: 7em;
+	height: 50px;
+	padding: 0;
+	border: 4px solid $black-color;
+	border-radius: 15px;
+	-webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+	background: rgb(83, 56, 56);
+}
+
+meter::-webkit-meter-bar {
+	background: none; //Required to get rid of the default background property
+  background: #86CC00;
+	border-radius: 15px;
+}
+meter::-webkit-meter-optimum-value {
+	background: #86CC00;
+}
+meter::-moz-meter-bar {
+	background: #86CC00;
+	border-radius: 15px;
+}
+
+meter {
+	box-shadow: 0px 0px 0px 4px $black-color;
+} */
+meter {
+	/* Reset the default appearance */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	height: 30px;
+	/* For Firefox */
+	background: #EEE;
+	border-radius: 5px;
+	border: 4px solid #000000;
+	flex-grow: 1;
+	margin-left: 1em;
+}
+
+/* WebKit */
+meter::-webkit-meter-bar {
+	background: #EEE;
+	border-radius: 5px;
+}
+
+meter::-webkit-meter-optimum-value,
+meter::-webkit-meter-suboptimum-value,
+meter::-webkit-meter-even-less-good-value {
+	border-radius: 4px;
+}
+
+meter::-webkit-meter-optimum-value {
+	background: #86CC00;
+}
+
+/* Firefox */
+meter::-moz-meter-bar {
+	/* border-radius: 3px; */
+}
+
+meter:-moz-meter-optimum::-moz-meter-bar {
+	background: #86CC00;
+	border-radius: 0px;
 }
 
 .foodBarLabel {
-  font-size: 2em;
-  margin: 0.5em;
+	font-family: "VT323", monospace;
+	font-size: 2.5rem;
+	text-transform: uppercase;
 }
 
 .button-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
 }
 
 button {
-  font-family: 'VT323', monospace;
-  font-size: 2.5rem;
-  height: 2.5em;
-  width: 7em;
-  background: #FFFFFF;
-  border: 4px solid #000000;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 15px;
-  box-sizing: border-box;
-  padding: 2%;
-  margin: 1rem;
-  cursor: pointer;
-  -webkit-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out;
+	font-family: 'VT323', monospace;
+	font-size: 2.5rem;
+	height: 2.5em;
+	width: 7em;
+	background: #FFFFFF;
+	border: 4px solid #000000;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.25);
+	box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 15px;
+	box-sizing: border-box;
+	padding: 2%;
+	margin: 1rem;
+	cursor: pointer;
+	-webkit-transition: all 150ms ease-in-out;
+	transition: all 150ms ease-in-out;
 }
 
 button:active {
-  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  -webkit-transform: translateY(4px);
-          transform: translateY(4px);
+	-webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+	-webkit-transform: translateY(4px);
+	transform: translateY(4px);
 }
 
 button:hover {
-  -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.37);
-          box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.37);
-  background-color: #ededed;
+	-webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.37);
+	box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.37);
+	background-color: #ededed;
 }
 
 .image {
-  width: 100%;
+	width: 100%;
 }
+
+#front-arm {
+	animation-name: front-arm;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes front-arm {
+	0% {
+		transform: rotate(0deg);
+		transform-origin: center;
+	}
+
+	50% {
+		transform: rotate(5deg);
+		transform-origin: center;
+	}
+
+	100% {
+		transform: rotate(0deg);
+		transform-origin: center;
+	}
+}
+
+#back-arm {
+	animation-name: back-arm;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-delay: 0.5s;
+}
+
+@keyframes back-arm {
+	0% {
+		transform: rotate(0deg);
+		transform-origin: center;
+	}
+
+	50% {
+		transform: rotate(5deg);
+		transform-origin: center;
+	}
+
+	100% {
+		transform: rotate(0deg);
+		transform-origin: center;
+	}
+}
+
 /*# sourceMappingURL=style.css.map */
