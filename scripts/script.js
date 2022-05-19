@@ -1,6 +1,6 @@
 const maxFood = 10;
-//change background image depending on the time
 
+//change background image depending on the time
 var currentTime = new Date().getHours();
 if (document.body) {
 	if (7 <= currentTime && currentTime < 20) {
@@ -42,11 +42,6 @@ let clock = () => {
 	setTimeout(clock, 1000);
 };
 clock();
-
-//*export in case if we'll use separate files*
-// export {
-// 	time as time
-// };
 
 //==========MONSTER TALK START
 const monsterPhrases = [
@@ -125,8 +120,6 @@ function showStartButton() {
 	startBtn.style.display = "block";
 }
 
-
-
 function createAndShowGameButtons() {
 	// Select the wrapper to put buttons in
 	const btnWrapper = document.querySelector(".button-wrapper");
@@ -146,16 +139,18 @@ function createAndShowGameButtons() {
 	//Food bar
 	let foodBar = document.getElementsByClassName("foodBar")[0];
 	if (!foodBar) {
-		let foodBar = CreateBar(monster.currentFood, "foodBar", "Food", "bar-wrapper");
+		let foodBar = CreateBar(
+			monster.currentFood,
+			"foodBar",
+			"Food",
+			"bar-wrapper"
+		);
 		monsterPicture.append(foodBar);
 	} else {
 		foodBar.style.display = "block";
 		foodBar.setAttribute("value", monster.currentFood.toString());
 	}
-
 }
-
-
 
 function startGame() {
 	hideBtn("#btn__reset");
@@ -173,14 +168,13 @@ function startGame() {
 function continueGame() {
 	hideStartButton();
 	createAndShowGameButtons();
-  // hungerEyes();
+	// hungerEyes();
 
 	//This updateCurrentTime() breaks logic
 	// updateCurrentTime();
 	if (monster.currentFood > 0) {
 		hungerInterval();
 	}
-
 }
 
 startBtn.addEventListener("click", startGame);
@@ -188,7 +182,6 @@ startBtn.addEventListener("click", startGame);
 let monster = {};
 
 function checkForMonsterObject() {
-
 	monster = JSON.parse(localStorage.getItem("monster"));
 	if (monster) {
 		console.log(monster);
@@ -196,9 +189,9 @@ function checkForMonsterObject() {
 		if (monster.currentFood > 0) {
 			continueGame();
 		} else {
-      resetBtnF();
-      hungerEyes();
-    }
+			resetBtnF();
+			hungerEyes();
+		}
 	} else {
 		showStartButton();
 
@@ -229,7 +222,6 @@ function createMonsterObject() {
 	localStorage.setItem("monster", JSON.stringify(monster));
 }
 
-
 //function updating current time in monster object(3rd key)
 function updateCurrentTime() {
 	monster.currentTime = time;
@@ -253,7 +245,6 @@ function setStartDate() {
 	localStorage.setItem("monster", JSON.stringify(monster));
 }
 
-
 //this variable will be assigned to actual millisecods of play time (difference between epochCurrentTime and epochGameStartTime)
 let milliseconds;
 
@@ -274,10 +265,6 @@ function formatPlayTime(milliseconds) {
 	return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 }
 
-//issues:
-//currentPlayTime starts as -1:-01 instead at 00:00
-//some milliseconds delay between currentPlayTime and currentTime
-//show three other button
 let getObj = localStorage.getItem("monster");
 let parseJSON = JSON.parse(getObj);
 let svgHTML = document.getElementById("eyes");
@@ -309,8 +296,8 @@ function feedBtnF() {
 }
 
 function resetBtnF() {
-  hideBtn("#btn__feed");
-  hideBtn('#btn');
+	hideBtn("#btn__feed");
+	hideBtn("#btn");
 	let resetBtn = document.getElementById("btn__reset");
 
 	if (!resetBtn) {
@@ -322,12 +309,6 @@ function resetBtnF() {
 	}
 }
 
-// Function to make the monster hungry over time
-// TODO replace "3000" with the variable to be able to change it later
-
-
-//REMOVED for loop because it executes the code only fixed number of times (10). Otherwise the monster stops to be hungry and never dies.
-// REMOVED variable which stored the monster.currentFood , because we don't need it.
 function hungerInterval() {
 	setTimeout(function timer() {
 		monster.currentFood--;
@@ -340,15 +321,13 @@ function hungerInterval() {
 			hungerInterval();
 		}
 
-
 		if (monster.currentFood == 0) {
 			resetBtnF();
 		}
 	}, 1000);
 }
 
-function hungerEyes(){
-
+function hungerEyes() {
 	let currentFood = monster.currentFood;
 
 	let svgHTML = document.getElementById("eyes");
@@ -373,10 +352,9 @@ function hungerEyes(){
 		svgHTML.innerHTML =
 			'<path d="M64 33L57 26L50 33" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
 	}
-};
+}
 
 // FOOD BAR
-
 
 function CreateBar(objectValue, className, text, divClassName) {
 	//div-wrapper
