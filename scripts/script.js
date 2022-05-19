@@ -124,6 +124,20 @@ function createAndShowGameButtons() {
 	// Select the wrapper to put buttons in
 	const btnWrapper = document.querySelector(".button-wrapper");
 
+	let foodBar = document.getElementsByClassName("foodBar")[0];
+	if (!foodBar) {
+		let foodBar = CreateBar(
+			monster.currentFood,
+			"foodBar",
+			"Food",
+			"bar-wrapper"
+		);
+		btnWrapper.append(foodBar);
+	} else {
+		foodBar.style.display = "block";
+		foodBar.setAttribute("value", monster.currentFood.toString());
+	}
+
 	//feed btn
 	let feedBtn = document.getElementById("btn__feed");
 	if (!feedBtn) {
@@ -137,19 +151,6 @@ function createAndShowGameButtons() {
 	console.log(monster.currentFood);
 
 	//Food bar
-	let foodBar = document.getElementsByClassName("foodBar")[0];
-	if (!foodBar) {
-		let foodBar = CreateBar(
-			monster.currentFood,
-			"foodBar",
-			"Food",
-			"bar-wrapper"
-		);
-		monsterPicture.append(foodBar);
-	} else {
-		foodBar.style.display = "block";
-		foodBar.setAttribute("value", monster.currentFood.toString());
-	}
 }
 
 function startGame() {
