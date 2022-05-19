@@ -51,9 +51,9 @@ main {
 	background-color: transparent;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
-	padding: 1em;
+	/* padding: 1em; */
 }
 
 .bar-wrapper {
@@ -108,51 +108,24 @@ meter {
 
 
 meter {
-	/* Reset the default appearance */
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
 
 
-	height: 30px;
-
-	/* For Firefox */
-	background: #EEE;
+  background: #EEE;
+	flex-grow: 1;
 	border-radius: 5px;
 	border: 4px solid #000000;
-	flex-grow: 1;
-	margin-left: 1em;
+  width: 100%;
+	
 }
-
-/* WebKit */
 meter::-webkit-meter-bar {
-	background: #EEE;
-
-	border-radius: 5px;
+  background: #EEE;
 }
-
-meter::-webkit-meter-optimum-value,
-meter::-webkit-meter-suboptimum-value,
-meter::-webkit-meter-even-less-good-value {
-	border-radius: 4px;
-}
-
-meter::-webkit-meter-optimum-value {
-	background: #86CC00;
-}
-
-
-
-/* Firefox */
-meter::-moz-meter-bar {
-	/* border-radius: 3px; */
-}
-
 meter:-moz-meter-optimum::-moz-meter-bar {
-	background: #86CC00;
-	border-radius: 0px;
+  background: #86CC00;
 }
-
+meter::-webkit-meter-optimum-value {
+  background: #86CC00;
+}
 
 
 
@@ -218,9 +191,10 @@ button:hover {
 	border: 4px solid black;
 	padding: 10px 20px;
 	text-align: center;
-	font-family: 'VT323', monospace;
-	font-size: 2rem;
-}
+	font-family: "VT323", monospace;
+	font-size: 2.5rem;
+	margin: 0;
+}/* a */
 
 #front-arm {
 	animation-name: front-arm;
