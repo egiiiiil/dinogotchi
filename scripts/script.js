@@ -1,5 +1,6 @@
 const maxFood = 10;
 //change background image depending on the time
+
 var currentTime = new Date().getHours();
 if (document.body) {
 	if (7 <= currentTime && currentTime < 20) {
@@ -47,10 +48,65 @@ clock();
 // 	time as time
 // };
 
+//==========MONSTER TALK START
+const monsterPhrases = [
+	//If ready (on page load)
+	["Let's play!", "Start the game already!", "Press that button!"],
+	//If start (after the game started)
+	["Let's see...", "What do we got here?", "What's going on?"],
+	//If happy
+	[
+		"I'm so happy right now!",
+		"I like this game!",
+		"It's fun to play with you!",
+	],
+	//If angry
+	["I'm so hungry!", "Give me that food!", "I'm starving!"],
+	//If dead
+	["Well, too late now...", "Okay, now I'm dead.", "Goodbye cruel world..."],
+	//If fed (on click feed button)
+	["Tastes good!", "*crunches food*", "Thank you!"],
+];
+
+const numberOfPhrases = 3;
+function getRandomNumber(numberOfPhrases) {
+	return Math.floor(Math.random() * numberOfPhrases);
+}
+
+function monsterSays(monsterStatus) {
+	const monsterSpeech = document.getElementById("monsterSpeech");
+	let phraseNumber;
+
+	if (monsterStatus === "ready") {
+		phraseNumber = getRandomNumber(numberOfPhrases);
+		monsterSpeech.innerHTML = monsterPhrases[0][phraseNumber];
+	} else if (monsterStatus === "start") {
+		phraseNumber = getRandomNumber(numberOfPhrases);
+		monsterSpeech.innerHTML = monsterPhrases[1][phraseNumber];
+	} else if (monsterStatus === "happy") {
+		phraseNumber = getRandomNumber(numberOfPhrases);
+		monsterSpeech.innerHTML = monsterPhrases[2][phraseNumber];
+	} else if (monsterStatus === "angry") {
+		phraseNumber = getRandomNumber(numberOfPhrases);
+		monsterSpeech.innerHTML = monsterPhrases[3][phraseNumber];
+	} else if (monsterStatus === "dead") {
+		phraseNumber = getRandomNumber(numberOfPhrases);
+		monsterSpeech.innerHTML = monsterPhrases[4][phraseNumber];
+	} else if (monsterStatus === "fed") {
+		phraseNumber = getRandomNumber(numberOfPhrases);
+		monsterSpeech.innerHTML = monsterPhrases[5][phraseNumber];
+	}
+}
+
+//==========MONSTER TALK END
+
 // BUTTONS***********************************************
-const startBtn = document.getElementById('btn');
-const mainTag = document.getElementsByTagName('main')[0];
+const startBtn = document.getElementById("btn");
+//TODO mainTag is never used
+const mainTag = document.getElementsByTagName("main")[0];
 const monsterPicture = document.querySelector(".image-wrapper");
+
+//TODO remove btnWrapper bc we have it inside the function createAndShowGameButtons
 
 // Select the wrapper to put buttons in
 const btnWrapper = document.querySelector(".button-wrapper");
@@ -58,7 +114,6 @@ const btnWrapper = document.querySelector(".button-wrapper");
 function hideStartButton() {
 	startBtn.style.display = "none";
 }
-
 function hideBtn(btnName) {
 	let btn = document.querySelector(btnName);
 	if (btn) {
@@ -69,6 +124,7 @@ function hideBtn(btnName) {
 function showStartButton() {
 	startBtn.style.display = "block";
 }
+
 
 
 function createAndShowGameButtons() {
@@ -124,6 +180,7 @@ function continueGame() {
 	if (monster.currentFood > 0) {
 		hungerInterval();
 	}
+
 }
 
 startBtn.addEventListener("click", startGame);
@@ -131,6 +188,7 @@ startBtn.addEventListener("click", startGame);
 let monster = {};
 
 function checkForMonsterObject() {
+
 	monster = JSON.parse(localStorage.getItem("monster"));
 	if (monster) {
 		console.log(monster);
@@ -143,13 +201,12 @@ function checkForMonsterObject() {
     }
 	} else {
 		showStartButton();
+
 		console.log("nothing");
 	}
 }
 
 checkForMonsterObject();
-
-//======================
 
 function createMonsterObject() {
 	//monster object
@@ -171,6 +228,7 @@ function createMonsterObject() {
 	//push monster object to local storage
 	localStorage.setItem("monster", JSON.stringify(monster));
 }
+
 
 //function updating current time in monster object(3rd key)
 function updateCurrentTime() {
@@ -267,6 +325,7 @@ function resetBtnF() {
 // Function to make the monster hungry over time
 // TODO replace "3000" with the variable to be able to change it later
 
+
 //REMOVED for loop because it executes the code only fixed number of times (10). Otherwise the monster stops to be hungry and never dies.
 // REMOVED variable which stored the monster.currentFood , because we don't need it.
 function hungerInterval() {
@@ -281,6 +340,7 @@ function hungerInterval() {
 			hungerInterval();
 		}
 
+
 		if (monster.currentFood == 0) {
 			resetBtnF();
 		}
@@ -288,19 +348,28 @@ function hungerInterval() {
 }
 
 function hungerEyes(){
+
 	let currentFood = monster.currentFood;
 
 	let svgHTML = document.getElementById("eyes");
 	if (currentFood === 0) {
 		console.log("dead");
+
+		monsterSays("dead");
+
 		svgHTML.innerHTML = `<path fill-rule="evenodd" clip-rule="evenodd" d="M52.4385 25L61.4385 34L52.4385 25Z" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M61 25L52 34L61 25Z" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>`;
 	} else if (currentFood < 4 && currentFood >= 1) {
 		console.log("angry");
+
+		monsterSays("angry");
+
 		svgHTML.innerHTML = `<path d="M56.5 34C58.9853 34 61 31.9853 61 29.5C61 27.0147 58.9853 25 56.5 25C54.0147 25 52 27.0147 52 29.5C52 31.9853 54.0147 34 56.5 34Z" fill="black" stroke="black" stroke-width="2" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M60 18L46 25" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>`;
 	} else if (currentFood >= 4) {
 		console.log("happy");
+
+		monsterSays("happy");
 		svgHTML.innerHTML =
 			'<path d="M64 33L57 26L50 33" stroke="black" stroke-width="4" stroke-miterlimit="1" stroke-linecap="round" stroke-linejoin="round"/>';
 	}

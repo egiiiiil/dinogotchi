@@ -5,6 +5,7 @@
 body {
 	background-size: 100%;
 	margin: 0;
+	font-size: 20px;
 }
 
 body,
@@ -22,7 +23,7 @@ main {
 	align-items: center;
 	justify-content: center;
 	font-size: 50px;
-	
+
 }
 
 main {
@@ -36,9 +37,10 @@ main {
 		// width: 100%;
 	}
 
-  
-  
+
+
 }
+
 @media screen and (max-width: 827px) {
 	main {
 		grid-template-columns: 1fr;
@@ -53,17 +55,118 @@ main {
 	align-items: center;
 	padding: 1em;
 }
-.bar-wrapper{
-  display: flex;
-  align-items: center;
+
+.bar-wrapper {
+	display: flex;
+	align-items: center;
+	width: 14em;
 }
-.foodBar{
-  font-size: 2em;
-  margin: 0.5em;
+
+/* .foodBar {
+	font-size: 2em;
+	margin: 0.5em;
+	// -webkit-appearance: none;
+	//Reset appearance
+	border: 1px solid #ccc;
+	border-radius: 15px;
+} */
+
+/* meter {
+	width: 7em;
+	height: 50px;
+	padding: 0;
+	border: 4px solid $black-color;
+	border-radius: 15px;
+	-webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+	background: rgb(83, 56, 56);
 }
-.foodBarLabel{
-  font-size: 2em;
-  margin: 0.5em;
+
+meter::-webkit-meter-bar {
+	background: none; //Required to get rid of the default background property
+  background: #86CC00;
+	border-radius: 15px;
+}
+meter::-webkit-meter-optimum-value {
+	background: #86CC00;
+}
+meter::-moz-meter-bar {
+	background: #86CC00;
+	border-radius: 15px;
+}
+
+meter {
+	box-shadow: 0px 0px 0px 4px $black-color;
+} */
+
+
+
+
+
+
+
+
+meter {
+	/* Reset the default appearance */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+
+
+	height: 30px;
+
+	/* For Firefox */
+	background: #EEE;
+	border-radius: 5px;
+	border: 4px solid #000000;
+	flex-grow: 1;
+	margin-left: 1em;
+}
+
+/* WebKit */
+meter::-webkit-meter-bar {
+	background: #EEE;
+
+	border-radius: 5px;
+}
+
+meter::-webkit-meter-optimum-value,
+meter::-webkit-meter-suboptimum-value,
+meter::-webkit-meter-even-less-good-value {
+	border-radius: 4px;
+}
+
+meter::-webkit-meter-optimum-value {
+	background: #86CC00;
+}
+
+
+
+/* Firefox */
+meter::-moz-meter-bar {
+	/* border-radius: 3px; */
+}
+
+meter:-moz-meter-optimum::-moz-meter-bar {
+	background: #86CC00;
+	border-radius: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+.foodBarLabel {
+	//margin: 0.5em;
+	font-family: 'VT323', monospace;
+	font-size: 2.5rem;
+	text-transform: uppercase;
 }
 
 .button-wrapper {
@@ -75,36 +178,32 @@ main {
 
 // BUTTONS***********************
 
-.btn__game {
-	//To style all btns
+
+button {
+	font-family: 'VT323', monospace;
+	font-size: 2.5rem;
+	height: 2.5em;
+	width: 7em;
+	background: #FFFFFF;
+	border: 4px solid #000000;
+	box-sizing: border-box;
+	box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 15px;
+	box-sizing: border-box;
 	padding: 2%;
 	margin: 1rem;
-
+	cursor: pointer;
+	transition: all 150ms ease-in-out;
 }
 
-#btn {
-	font-family: 'VT323', monospace;
-	font-size: 2em;
-	height: 2.5em;
-	width: 7em;
-	background: #FFFFFF;
-	border: 4px solid #000000;
-	box-sizing: border-box;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 15px;
-	box-sizing: border-box;
+button:active {
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+	transform: translateY(4px);
 }
-.btn__game {
-	font-family: 'VT323', monospace;
-	font-size: 2em;
-	height: 2.5em;
-	width: 7em;
-	background: #FFFFFF;
-	border: 4px solid #000000;
-	box-sizing: border-box;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 15px;
-	box-sizing: border-box;
+
+button:hover {
+	box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.37);
+	background-color: #ededed;
 }
 
 
@@ -113,5 +212,60 @@ main {
 
 }
 
+#monsterSpeech {
+	background: white;
+	border-radius: 50px;
+	border: 4px solid black;
+	padding: 10px 20px;
+	text-align: center;
+	font-family: 'VT323', monospace;
+	font-size: 2rem;
+}
+
+#front-arm {
+	animation-name: front-arm;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes front-arm {
+	0% {
+		transform: rotate(0deg);
+		transform-origin: center;
+	}
+
+	50% {
+		transform: rotate(5deg);
+		transform-origin: center;
+	}
+
+	100% {
+		transform: rotate(0deg);
+		transform-origin: center;
+	}
+}
 
 
+#back-arm {
+	animation-name: back-arm;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-delay: 0.5s;
+}
+
+@keyframes back-arm {
+	0% {
+		transform: rotate(0deg);
+		transform-origin: center;
+	}
+
+	50% {
+		transform: rotate(5deg);
+		transform-origin: center;
+	}
+
+	100% {
+		transform: rotate(0deg);
+		transform-origin: center;
+	}
+}
